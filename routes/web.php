@@ -12,8 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.welcome');
 });
+
+
+
+
+Route::get('/register', 'RegisterController@index')->name('register');
 
 Auth::routes();
 

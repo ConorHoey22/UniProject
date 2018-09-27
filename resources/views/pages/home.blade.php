@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+<!--This is the first page after login-->
+
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
