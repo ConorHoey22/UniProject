@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+
+<!--This is the layout for logged in users-->
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -38,12 +41,12 @@
         <li><a href="#">Profile</a></li>
         <li><a href="#">Daily Music</a></li>
         <li><a href="#">Search</a></li>
+        <li><a href="{{ url('logout') }}">Log out</a></li>
       </ul>
       <!--This is the right side of the Navbar--> <!--Still can see login + signup FIX-->
       @endauth
       <ul class= "nav navbar-nav right">
-        <li><a href="{{ url('register') }}">Sign Up</a></li>
-        <li><a href="{{ url('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+       
       </ul>
       @endif
     </div>
