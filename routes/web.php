@@ -12,14 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('pages.welcome');
+    return view('welcome');
 });
 
 
 
-
-Route::get('/register', 'RegisterController@index')->name('register');
+Route::get('login', 'LoginController@index')->name('login');
+Route::get('register', 'RegisterController@index')->name('register');
 
 Auth::routes();
 
+
+/*Route::view('/homepage', 'pages.home');*/
 Route::get('/home', 'HomeController@index')->name('home');

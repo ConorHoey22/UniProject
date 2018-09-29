@@ -26,7 +26,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span> 
       </button>
-      <a class="navbar-brand" href="{{ route('/') }}">DiscoverMusic   </a> <!--Still need to link this--> 
+      <a class="navbar-brand" href="#">DiscoverMusic   </a> <!--Still need to link this--> 
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
 
@@ -34,16 +34,14 @@
       <ul class="nav navbar-nav">
       @if (Route::has('login'))
       @auth
-        <li class="active"><a href="{{ route('pages.welcome') }}">Home</a></li>
-        <li><a href="#">Page 1</a></li>
-        <li><a href="#">Page 2</a></li> 
-        <li><a href="#">Page 3</a></li> 
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Profile</a></li>
       </ul>
-      <!--This is the right side of the Navbar-->
+      <!--This is the right side of the Navbar--> <!--Still can see login + signup FIX-->
       @endauth
       <ul class= "nav navbar-nav right">
-        <li><a href="{{ route('register') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="{{ route('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href="{{ url('register') }}">Sign Up</a></li>
+        <li><a href="{{ url('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
       @endif
     </div>
