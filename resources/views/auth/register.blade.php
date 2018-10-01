@@ -1,4 +1,4 @@
-@extends('layouts.profileLayout')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -72,7 +72,7 @@
                     <div class="form-group row">
                      <label for="userType" class="col-md-4 col-form-label text-md-right">{{ __('Type of user:') }}</label>
                         <div class="col-md-6">
-                              <select name = "userType">
+                              <select name = "userType"  class="form-control input">
                                   <option value="Listener">Listener</option>
                                   <option value="Artist">Artist</option>
                                   <option value="Band">Band</option>

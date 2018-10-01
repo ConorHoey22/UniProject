@@ -13,12 +13,14 @@
  <!-- Latest compiled and minified CSS -->
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
+    
 
    
 <nav class="navbar navbar-inverse">
@@ -37,9 +39,9 @@
       <ul class="nav navbar-nav">
       @if (Route::has('login'))
       @auth
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Daily Music</a></li>
+        <li class="active"><a href="{{ url('/dashboard') }}">Home</a></li>
+        <li><a href="{{ url('/profile') }}">Profile</a></li>
+        <li><a href="{{ url('/createProfile') }}">Daily Music</a></li>
         <li><a href="#">Search</a></li>
         <li><a href="{{ url('logout') }}">Log out</a></li>
       </ul>

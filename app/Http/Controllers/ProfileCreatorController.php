@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
-class HomeController extends Controller
+class ProfileCreatorController extends Controller
 {
-    /**
+     /**
      * Create a new controller instance.
      *
      * @return void
@@ -21,8 +22,18 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        return view('home');
+       
+        /* Genres Dropdown  - This creates a list from the Database table called musicgenres which store genres*/
+
+        $genre_list = DB::table('musicgenres')
+        ->groupBy('genre')
+        ->get();
+
+        return view('pages.createProfile')->with('genre_list', $genre_list);
     }
 }
+
+?>

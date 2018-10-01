@@ -24,4 +24,7 @@ Auth::routes();
 
 
 /*Route::view('/homepage', 'pages.home');*/
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/profile', 'ProfileController@index')->name('profile');
+Route::get('/createProfile','ProfileCreatorController@index');
+
