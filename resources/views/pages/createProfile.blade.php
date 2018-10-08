@@ -25,7 +25,7 @@
 </div>
 
 <div class = "socialMedia_container">
-    <p>Connect your social media(Optional) </p>
+    <p>Connect your social media(Optional)</p>
     <p>Facebook</p>
     <p>Instagram</p>
     <p>Twitter</p>
@@ -37,118 +37,48 @@
 
 <!-- NOTE::::: What we could do is have a button --- Would you like to add another?-->
 
-<div class = "genre1_container">
+<br>
+
+
     <p>Please some the genre of music in which you enjoy listening which will help us send you a random song everyday.</p>
     
-    <div class="form-group">
-
-        <select name ="genre" id ="genre" class="form-control input-lg" style = "width:200px">     
+    
+    
+    <form method="POST" action="/createProfileCreate">
+    @csrf
+        <select name ="genre1" id ="genre1" class="form-control input-lg" style = "width:200px">     
     
         
 
             <option value="">Select a Genre </option> <!--Placeholder-->
 
-            @foreach($genre_list as $genre)
-            <option value="{{$genre->genre}}">
-            {{$genre->genre}}</option>
+            @foreach($genre_list as $genreName)
+            <option value="{{$genreName->genreName}}">
+            {{$genreName->genreName}}</option>
             @endforeach
 
         </select>
+        {{ csrf_field() }}
 
-    </div>
 
-</div>
+        
+        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                              
+
+                                    {{ __('Register') }}
+                                </button>
+                            </div>
+        </div>
+
+   <form>
+
 {{ csrf_field() }}
 
 <br>
 
-<div class = "genre2_container">
- 
-    
-    <div class="form-group">
 
-        <select name ="genre" id ="genre" class="form-control input-lg" style = "width:200px">
 
-            <option value="">Select a Genre </option> <!--Placeholder-->
-
-            @foreach($genre_list as $genre)
-            <option value="{{$genre->genre}}">
-            {{$genre->genre}}</option>
-            @endforeach
-
-        </select>
-
-    </div>
-
-</div>
-{{ csrf_field() }}
-
-<br>
-
-<div class = "genre3_container">
-  
-    
-    <div class="form-group">
-
-        <select name ="genre" id ="genre" class="form-control input-lg" style = "width:200px">
-
-            <option value="">Select a Genre </option> <!--Placeholder-->
-
-            @foreach($genre_list as $genre)
-            <option value="{{$genre->genre}}">
-            {{$genre->genre}}</option>
-            @endforeach
-
-        </select>
-
-    </div>
-
-</div>
-{{ csrf_field() }}
-
-<br>
-
-<div class = "genre4_container">
-   
-    
-    <div class="form-group">
-
-        <select name ="genre" id ="genre" class="form-control input-lg" style = "width:200px">
-
-            <option value="">Select a Genre </option> <!--Placeholder-->
-
-            @foreach($genre_list as $genre)
-            <option value="{{$genre->genre}}">
-            {{$genre->genre}}</option>
-            @endforeach
-
-        </select>
-
-    </div>
-
-</div>
-{{ csrf_field() }}
-
-<br>
-
-<div class = "genre5_container">
-    
-    <div class="form-group">
-
-        <select name ="genre" id ="genre" class="form-control input-lg" style = "width:200px">
-
-            <option value="">Select a Genre </option> <!--Placeholder-->
-
-            @foreach($genre_list as $genre)
-            <option value="{{$genre->genre}}">
-            {{$genre->genre}}</option>
-            @endforeach
-
-        </select>
-
-    </div>
-
-</div>
-{{ csrf_field() }}
 
 @endsection

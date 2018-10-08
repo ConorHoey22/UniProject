@@ -61,13 +61,24 @@
                             </div>
                         </div>
 
+                 <!--NOTE : This dropdown needs to be prepopulated through a json file? or an input-->
+                        <div class="form-group row">
+                            <label for="country" class="col-md-4 col-form-label text-md-right">{{ __('Country:') }}</label>
 
-                    <!--UserType DropDown Selection
-                    <div class="form-group row">
-                            <label for="userType" class="col-md-4 col-form-label text-md-right">{{ __('Select a user type:') }}</label>
+                            <div class="col-md-6">
+                                <input id="country" type="text"  name="country" class= "form-control" required autofocus>
+                            </div>
+                        </div>
 
-                            <div class="col-md-6">-->
-                             
+                          
+                 <!--NOTE : This dropdown needs to be prepopulated through a json file? or an input-->
+                        <div class="form-group row">
+                            <label for="location" class="col-md-4 col-form-label text-md-right">{{ __('Town/City:') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="location" type="text"  name="location" class= "form-control" required autofocus>
+                            </div>
+                        </div>   
 
                     <div class="form-group row">
                      <label for="userType" class="col-md-4 col-form-label text-md-right">{{ __('Type of user:') }}</label>
@@ -79,6 +90,45 @@
                               </select>
                         </div>
                     </div>
+
+                    <!--NOTE : This dropdown needs to be prepopulated through a json file? or an input-->
+                     <div class="form-group row">
+                     <label for="genre" class="col-md-4 col-form-label text-md-right">{{ __('Please select a genre of music in which you enjoy listening which will help us send you a random song everyday:') }}</label>
+                   
+                        <div class="col-md-6">
+                              <select name = "genre"  class="form-control input">
+                                  <option value="Pop">Pop</option>
+                                  <option value="Rock">Rock</option>
+                                  <option value="Folk">Folk</option>
+                              </select>
+                        </div>
+                    </div>
+
+
+                    <!--IF USERTYPE == Artist or Band-->
+
+
+                    <div class="form-group row mb-0">
+                          <div class="col-md-6 offset-md-4">
+                                <button type="button" class="btn btn-primary" onclick="connectSpotifyAPI()">
+                                    {{ __('Connect Spotify') }}
+                        
+
+                                </button>
+                          </div>
+                    </div>
+
+
+
+
+
+
+<iframe src="https://open.spotify.com/embed/album/3EhZIuxBiEh6yCkosURDQ3" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+<p>If your on mobile setting up your account for spotify 
+
+
+
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
