@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-
-<!--This is the layout for logged in users-->
-
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -12,15 +9,14 @@
 
  <!-- Latest compiled and minified CSS -->
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 
+ <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
-    
 
    
 <nav class="navbar navbar-inverse">
@@ -39,16 +35,15 @@
       <ul class="nav navbar-nav">
       @if (Route::has('login'))
       @auth
-        <li class="active"><a href="{{ url('/dashboard') }}">Home</a></li>
+        <li class="active"><a href="#">Home</a></li>
         <li><a href="{{ url('/profile') }}">Profile</a></li>
-        <li><a href="{{ url('/createProfile') }}">Daily Music</a></li>
-        <li><a href="#">Search</a></li>
         <li><a href="{{ url('logout') }}">Log out</a></li>
       </ul>
       <!--This is the right side of the Navbar--> <!--Still can see login + signup FIX-->
       @endauth
       <ul class= "nav navbar-nav right">
-       
+        <li><a href="{{ url('register') }}">Sign Up</a></li>
+        <li><a href="{{ url('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
       @endif
     </div>
@@ -65,9 +60,10 @@
 
 <body>
 
-
-
 @yield('content')
+
+
+
 
 
 

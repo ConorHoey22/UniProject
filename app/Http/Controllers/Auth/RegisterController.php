@@ -75,6 +75,7 @@ class RegisterController extends Controller
             'location' => 'required|string|max:255',
             'userType' => 'required|string|max:255',
             'genre' => 'required|string|max:255',
+            'profileDescription' => 'required|string|max:255',
            
      
 
@@ -97,7 +98,7 @@ class RegisterController extends Controller
             'location' => $data['location'],
             'userType' => $data['userType'],
             'genre' => $data['genre'],
- 
+            'profileDescription' => $data['profileDescription'],
             
             
          
