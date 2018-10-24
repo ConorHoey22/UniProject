@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class DailyMusicController extends Controller
 {
@@ -29,6 +30,26 @@ class DailyMusicController extends Controller
 
         
     }
+
+    public function randomProfileMatch()
+    {
+        //This find a random band , however we need now to based on the genre they want
+        //Also limit this feature to every 24 hours
+
+        $randomUser = DB::table('users')
+                 ->inRandomOrder()
+                 ->where('userType','Band')
+                 ->take(1)
+                 ->get();
+
+        
+
+
+        return view('pages.dailyMusic')->with('randomUser',$randomUser);
+
+
+    }
+
 
 
 

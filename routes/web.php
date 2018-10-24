@@ -28,3 +28,7 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::get('/createProfile','ProfileCreatorController@index');
 Route::get('/createProfileCreate','ProfileCreatorController@create');
+
+
+Route::get('/dailyMusic','DailyMusicController@randomProfileMatch'); 
+ 

@@ -76,6 +76,7 @@ class RegisterController extends Controller
             'userType' => 'required|string|max:255',
             'genre' => 'required|string|max:255',
             'profileDescription' => 'required|string|max:255',
+         //   'dailyMusicMatch' => 'required|string|max:255',
            
      
 
@@ -99,6 +100,8 @@ class RegisterController extends Controller
             'userType' => $data['userType'],
             'genre' => $data['genre'],
             'profileDescription' => $data['profileDescription'],
+            //'dailyMusicMatch' => $data['dailyMusicMatch'],
+          
             
             
          

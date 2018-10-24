@@ -41,7 +41,6 @@
       @auth
         <li class="active"><a href="{{ url('/dashboard') }}">Home</a></li>
         <li><a href="{{ url('/profile') }}">Profile</a></li>
-        <li><a href="{{ url('/createProfile') }}">Daily Music</a></li>
         <li><a href="#">Search</a></li>
         <li><a href="{{ url('logout') }}">Log out</a></li>
       </ul>

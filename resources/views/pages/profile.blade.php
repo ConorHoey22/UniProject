@@ -9,16 +9,18 @@
         <div class = "displayProfileImage">
              <p>
              <!--Profile Image-->
-
-
+        
+            <!-- {{ Auth::user()->profileImage }}-->
 
             </p>
         </div>
 
-          <!--Username of current Logged in user-->
+          <!--Username of current Logged in user--  {{ Auth::user()->username }} -->
          <div class = "displayCurrentUser">
              <p>
-              {{ Auth::user()->username }} 
+
+             {{ Auth::user()->username }}
+              
            </p>
          </div>
 
@@ -40,6 +42,9 @@
         <div class = "Spotify">
             <p>
 
+                <?php exec('app/node connectSpotify.js') ?>
+
+    <button onclick = "spotifyAuth()"> Spotify</button>
             </p>
         </div>
 

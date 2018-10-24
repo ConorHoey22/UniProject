@@ -37,6 +37,7 @@
       @auth
         <li class="active"><a href="#">Home</a></li>
         <li><a href="{{ url('/profile') }}">Profile</a></li>
+        <li><a href="{{ url('/dailyMusic') }}">Daily Music</a></li>
         <li><a href="{{ url('logout') }}">Log out</a></li>
       </ul>
       <!--This is the right side of the Navbar--> <!--Still can see login + signup FIX-->

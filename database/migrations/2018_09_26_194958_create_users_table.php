@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('userType');
             $table->string('genre');
             $table->string('profileDescription');
+            // $table->string('dailyMusicMatch')->default('Default'); //CHange this , may create a bug
             $table->remembertoken(); /*BUG*/
             $table->timestamps();
         });
