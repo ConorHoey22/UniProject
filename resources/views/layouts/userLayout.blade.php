@@ -13,7 +13,7 @@
  <!-- Latest compiled and minified CSS -->
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 
     <!-- Fonts -->
@@ -47,7 +47,9 @@
       <!--This is the right side of the Navbar--> <!--Still can see login + signup FIX-->
       @endauth
       <ul class= "nav navbar-nav right">
-       
+        <li><a href="{{ url('register') }}">Sign Up</a></li>
+        <li><a href="{{ url('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
       </ul>
       @endif
     </div>

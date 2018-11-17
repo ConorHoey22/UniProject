@@ -101,6 +101,7 @@ class RegisterController extends Controller
             'genre' => $data['genre'],
             'profileDescription' => $data['profileDescription'],
             //'dailyMusicMatch' => $data['dailyMusicMatch'],
+            //We need a variable to set which genre of music they release  - If a band/artist
           
             
             

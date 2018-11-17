@@ -13,6 +13,7 @@ class CreateUsersGenresTable extends Migration
      */
     public function up()
     {
+        //Used for users(Musician Account) to set they release
         Schema::create('users_genres', function (Blueprint $table) {
             $table->integer('genreID_FK')->unsigned();
             $table->foreign('genreID_FK')->references('genreID')->on('genre');

@@ -31,4 +31,6 @@ Route::get('/createProfileCreate','ProfileCreatorController@create');
 
 
 Route::get('/dailyMusic','DailyMusicController@randomProfileMatch'); 
+
+Route::get('/editProfile','EditProfileController@index');
  
