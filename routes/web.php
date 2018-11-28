@@ -23,14 +23,25 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Auth::routes();
 
 
-/*Route::view('/homepage', 'pages.home');*/
+
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::get('/createProfile','ProfileCreatorController@index');
 Route::get('/createProfileCreate','ProfileCreatorController@create');
 
 
-Route::get('/dailyMusic','DailyMusicController@randomProfileMatch'); 
+
+
+Route::get('/dailyMusicRandomMatch','DailyMusicController@randomMatch');
+Route::post('/dailyMusicUpdate', 'DailyMusicController@update');
+Route::get('/dailyMusic','DailyMusicController@index');
+//Route::get('/dailyMusic','DailyMusicController@randomMatch');
+
+
+
+Route::get('/spotifyApi','SpotifyController@SpotifyAPI');
+
+
 
 Route::get('/editProfile','EditProfileController@index');
  
