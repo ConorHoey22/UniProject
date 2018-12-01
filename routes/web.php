@@ -33,15 +33,16 @@ Route::get('/createProfileCreate','ProfileCreatorController@create');
 
 
 Route::get('/dailyMusicRandomMatch','DailyMusicController@randomMatch');
-Route::post('/dailyMusicUpdate', 'DailyMusicController@update');
+Route::post('/basicSearchUpdate', 'DailyMusicController@basicSearchUpdate');
+Route::post('/advancedSearchUpdate', 'DailyMusicController@advancedSearchUpdate');
 Route::get('/dailyMusic','DailyMusicController@index');
-//Route::get('/dailyMusic','DailyMusicController@randomMatch');
 
 
 
-Route::get('/spotifyApi','SpotifyController@SpotifyAPI');
+
+Route::get('/basicSearch','SpotifyController@basicSearch');
+Route::get('/advancedSearch','SpotifyController@advanceSearch');
 
 
 
 Route::get('/editProfile','EditProfileController@index');
- 
