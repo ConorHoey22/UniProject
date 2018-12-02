@@ -59,9 +59,16 @@ class SpotifyController extends Controller
     //    $instrumentalnessMin  = 0.7;
       //  $instrumentalnessMax = 1.0;
        
-
+try
+{
+    $api = new Larafy('24974f52d3fc4029a03bee338698b062', 'a3cffe10627f44daafb8b7fe91d536dd');    
+}
+catch(\Exception $ex)
+{
+    return view('pages.errorSpotifyPage');
+}
         
-        $api = new Larafy('24974f52d3fc4029a03bee338698b062', 'a3cffe10627f44daafb8b7fe91d536dd');    
+      
 
         try 
         {
@@ -99,6 +106,8 @@ class SpotifyController extends Controller
         {
             // invalid ID & Secret provided 
             $e->getAPIResponse(); // Get the JSON API response.
+
+            return view('pages.errorSpotifyPage');
         }
 
 
@@ -145,8 +154,19 @@ class SpotifyController extends Controller
         //WHAT IF THEY ARE EMPTY CAN YOU STILL GET
         $livenessMax =  request()->get('livenessMax');
 
-    $api = new Larafy('24974f52d3fc4029a03bee338698b062', 'a3cffe10627f44daafb8b7fe91d536dd');// need to somewhere
+        try
+        {
+            $api = new Larafy('24974f52d3fc4029a03bee338698b062', 'a3cffe10627f44daafb8b7fe91d536dd');    
+        }
+        catch(\Exception $ex)
+        {
+            return view('pages.errorSpotifyPage');
+        }
 
+
+
+
+    
 
 
 
