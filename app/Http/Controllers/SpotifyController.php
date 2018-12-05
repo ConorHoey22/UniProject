@@ -181,14 +181,14 @@ catch(\Exception $ex)
              $seed = (new LarafySeed)
             ->setGenres([$SetGenre]);
 
-          echo "3";
+      
         }   
         elseif(empty($instrumentalnessMin) || (empty($instrumentalnessMax) && (!empty($SetGenre)))) // try === 
         {
             $seed = (new LarafySeed)
             ->setGenres([$SetGenre])
             ->setLiveness($livenessMin,$livenessMax);
-          echo "1";
+    
 
         }
         elseif(empty($livenessMin) || (empty($livenessMax) && (!empty($SetGenre))))
@@ -196,7 +196,7 @@ catch(\Exception $ex)
             $seed = (new LarafySeed)
             ->setGenres([$SetGenre])
             ->setInstrumentalness($instrumentalnessMin,$instrumentalnessMax);
-           echo "2";
+      
         }
 
         
@@ -206,7 +206,7 @@ catch(\Exception $ex)
             ->setGenres([$SetGenre])
             ->setInstrumentalness($instrumentalnessMin,$instrumentalnessMax)
             ->setLiveness($livenessMin,$livenessMax);
-         echo "4";
+      
 
         }
 

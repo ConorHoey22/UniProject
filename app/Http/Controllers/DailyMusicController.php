@@ -45,15 +45,6 @@ class DailyMusicController extends Controller
     {
 
 
-//TEST2 
-
-
-    //Test so  by default we want RandomUser only
-    $randomUser = DB::table('users')
-    ->inRandomOrder()
-    ->where('userType','Band') //We need a variable to set which genre of music they release 
-    ->take(1)
-    ->get();
 
     $SetGenre = "";
    // $instrumentalnessMin;
@@ -65,7 +56,7 @@ class DailyMusicController extends Controller
 //But we dont want to set it yet
 
  //IF user has not selected a Spotify Genre  - random user from DB and activation bool is passed to check 
-     return view('pages.dailyMusic')->with('randomUser', $randomUser)->with('SetGenre' , $SetGenre);
+     return view('pages.dailyMusic')->with('SetGenre' , $SetGenre);
 
     // ->with('instrumentalnessMin', $instrumentalnessMin)->with('instrumentalnessMax', $instrumentalnessMax);
     }

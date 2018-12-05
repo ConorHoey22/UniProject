@@ -108,15 +108,6 @@
                     <!--IF USERTYPE == Artist or Band-->
 
 
-                    <div class="form-group row mb-0">
-                          <div class="col-md-6 offset-md-4">
-                                <button type="button" class="btn btn-primary" onclick="connectSpotifyAPI()">
-                                    {{ __('Connect Spotify') }}
-                        
-
-                                </button>
-                          </div>
-                    </div>
 
                      <!--NOTE : This dropdown needs to be prepopulated through a json file? or an input-->
                      <div class="form-group row">
@@ -129,32 +120,8 @@
 
 
 
-                    <div class = connectSpotify>
-                        <label for="connectSpotify" class="col-md-4 col-form-label text-md-right">{{ __('Connect your Spotify:') }}</label>
-                    </div>
 
 
-                    <div class = connectSoundCloud>
-                        <label for="connectSoundCloud" class="col-md-4 col-form-label text-md-right">{{ __('Connect your SoundCloud:') }}</label>
-                    </div>
-
-
-                    <div class = connectFacebook>
-                         <label for="connectFacebook" class="col-md-4 col-form-label text-md-right">{{ __('Connect your Facebook:') }}</label>
-                    </div>
-
-                    <div class = connectTwitter>
-                        <label for="connectTwitter" class="col-md-4 col-form-label text-md-right">{{ __('Connect your Twitter:') }}</label>
-                    </div>
-
-                    <div class = connectInstagram>
-                        <label for="connectInstagram" class="col-md-4 col-form-label text-md-right">{{ __('Connect your Instagram:') }}</label>
-                    </div>
-
-
-<iframe src="https://open.spotify.com/embed/album/3EhZIuxBiEh6yCkosURDQ3" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-
-<p>If your on mobile setting up your account for spotify 
 
 
 

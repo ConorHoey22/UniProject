@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -29,23 +30,23 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
 
-    <!--This is the left side of the Navbar-->
+    
+   
+      <!--This is the left side of the Navbar-->
       <ul class="nav navbar-nav">
       @if (Route::has('login'))
       @auth
-        <li class="active"><a href="{{ url('/dashboard') }}">Home</a></li>
+        <li class="active"><a href="#">Home</a></li>
         <li><a href="{{ url('/profile') }}">Profile</a></li>
-        <li><a href="#">Search</a></li>
+        <li><a href="{{ url('/dailyMusic') }}">Daily Music</a></li>
         <li><a href="{{ url('logout') }}">Log out</a></li>
       </ul>
       <!--This is the right side of the Navbar--> <!--Still can see login + signup FIX-->
       @endauth
-      <ul class= "nav navbar-nav right">
-        <li><a href="{{ url('register') }}">Sign Up</a></li>
-        <li><a href="{{ url('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul>
-      </ul>
+      
       @endif
+
+
     </div>
   </div>
 </nav>

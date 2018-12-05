@@ -1,4 +1,4 @@
-@extends('layouts.profileLayout')
+@extends('layouts.userlayout')
 
 
 @section('content')
