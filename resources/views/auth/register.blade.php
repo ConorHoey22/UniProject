@@ -1,36 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
+                   <div class="card-body">
 
-                <div class="card-body">
+                     <!--Beginning of the Register Form - Values entered are sent to the RegisterController-->
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-
+                        <!--Username-->
                         <div class="form-group row">
                             <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username:') }}</label>
-
-                            <div class="col-md-6">
+                              <div class="col-md-6">
                                 <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
-
-                                @if ($errors->has('username'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-                                @endif
+                                    @if ($errors->has('username'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('username') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
 
+                        <!--Email-->
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address:') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
+                                <!--User Validatin-->
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -39,12 +40,13 @@
                             </div>
                         </div>
 
+                        <!--Password-->
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password:') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
+                                <!--User Validation-->
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -52,7 +54,7 @@
                                 @endif
                             </div>
                         </div>
-
+                        <!--Confirm password-->
                         <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password:') }}</label>
 
@@ -61,7 +63,7 @@
                             </div>
                         </div>
 
-                 <!--NOTE : This dropdown needs to be prepopulated through a json file? or an input-->
+                        <!--Country-->
                         <div class="form-group row">
                             <label for="country" class="col-md-4 col-form-label text-md-right">{{ __('Country:') }}</label>
 
@@ -70,8 +72,7 @@
                             </div>
                         </div>
 
-                          
-                 <!--NOTE : This dropdown needs to be prepopulated through a json file? or an input-->
+                        <!--Location-->
                         <div class="form-group row">
                             <label for="location" class="col-md-4 col-form-label text-md-right">{{ __('Town/City:') }}</label>
 
@@ -80,18 +81,19 @@
                             </div>
                         </div>   
 
-                    <div class="form-group row">
-                     <label for="userType" class="col-md-4 col-form-label text-md-right">{{ __('Type of user:') }}</label>
-                        <div class="col-md-6">
-                              <select name = "userType"  class="form-control input">
-                                  <option value="Listener">Listener</option>
-                                  <option value="Artist">Artist</option>
-                                  <option value="Band">Band</option>
-                              </select>
+                        <!--UserTypes-->
+                        <div class="form-group row">
+                        <label for="userType" class="col-md-4 col-form-label text-md-right">{{ __('Type of user:') }}</label>
+                            <div class="col-md-6">
+                                <select name = "userType"  class="form-control input">
+                                    <option value="Listener">Listener</option>
+                                    <option value="Artist">Artist</option>
+                                    <option value="Band">Band</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <!--NOTE : This dropdown needs to be prepopulated through a json file? or an input-->
+                    <!--Genre - Used for Profile Content-->
                      <div class="form-group row">
                      <label for="genre" class="col-md-4 col-form-label text-md-right">{{ __('Please select a genre of music in which you enjoy listening which will help us send you a random song everyday:') }}</label>
                    
@@ -103,28 +105,14 @@
                               </select>
                         </div>
                     </div>
-
-
-                    <!--IF USERTYPE == Artist or Band-->
-
-
-
-                     <!--NOTE : This dropdown needs to be prepopulated through a json file? or an input-->
+  
+                    <!--Description - Used for Profile Content-->
                      <div class="form-group row">
                             <label for="profileDescription" class="col-md-4 col-form-label text-md-right">{{ __('Description:') }}</label>
-
                             <div class="col-md-6">
                                 <input id="profileDescription" type="text"  name="profileDescription" class= "form-control" required autofocus>
                             </div>
                         </div>
-
-
-
-
-
-
-
-
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

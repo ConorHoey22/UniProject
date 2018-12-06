@@ -1,0 +1,26 @@
+h1 
+{
+    font-weight: bold;
+    font-size: 20px;
+    position: relative;
+    left: 10px;
+}
+
+p  
+{
+    font-size: 15px;
+    position: relative;
+    left: 30px;
+}
+
+label
+{
+    position: relative;
+    left: 60px;
+}
+
+form
+{
+    position: center;
+    right: 120px;
+}
