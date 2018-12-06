@@ -83,7 +83,7 @@ class SpotifyController extends Controller
         }
 
 
-        //Exception handling  - If the user enter values in which result the API being unable to find data
+        //Stores and retrieves specific data from the data sent by the API
         try 
         {
                 //Spotify Artist/Band URL
@@ -139,31 +139,33 @@ class SpotifyController extends Controller
             return view('pages.errorSpotifyPage');
         }
 
- 
-try
-{
+    //User Validation
+    try
+    {       //User does not select a InstrumentalnessMin or Max value AND does not select LivenessMin or Max value but selects a genre 
         if((empty($instrumentalnessMin) || empty($instrumentalnessMax)) && (empty($livenessMin) || empty($livenessMax) && !empty($SetGenre)))
         {
-           
+           //NOTE : Genre is made required within the HTML form dropdown
              $seed = (new LarafySeed)
             ->setGenres([$SetGenre]);
-          echo "3";
 
       
         }   
+        //User does not select a InstrumentalnessMin or Max value AND selects a genre and livenessMin and max values  
         elseif((empty($instrumentalnessMin) || empty($instrumentalnessMax)) && (!empty($SetGenre) && !empty($livenessMin) && !empty($livenessMax))) // try === 
         {
+            
             $seed = (new LarafySeed)
             ->setGenres([$SetGenre])
             ->setLiveness($livenessMin,$livenessMax);
-          echo "1";
+          
         }
+        //User does not select a livenessMin or Max value AND selects a genre and instrumentalMin and max values  
         elseif((empty($livenessMin) || empty($livenessMax)) && (!empty($SetGenre) && !empty($instrumentalnessMin)) && (!empty($instrumentalnessMax)))
         {
             $seed = (new LarafySeed)
             ->setGenres([$SetGenre])
             ->setInstrumentalness($instrumentalnessMin,$instrumentalnessMax);
-           echo "2";
+          
         }
         
         else
@@ -172,65 +174,52 @@ try
             ->setGenres([$SetGenre])
             ->setInstrumentalness($instrumentalnessMin,$instrumentalnessMax)
             ->setLiveness($livenessMin,$livenessMax);
-         echo "4";
+        
         }
 
-        $limit = 1;
-        $offset = 1;
 
-        $result= $api->getRecommendations($seed, $limit);
+        $limit = 1;//The amount of artists ands band , the user will receive 
+        $offset = 1;// Set to one to ensure that the user can only receive one , This could be increase so between 1 and 5 artist but to ensure that it says at one 
+        
+        $result= $api->getRecommendations($seed, $limit); //$result used to store the data from the API
 
         $result = json_decode(json_encode($result), true); //convert returned stdClass object into associative array
 
-        
 
-
-
-}
+    }
     catch(\Rennokki\Larafy\Exceptions\SpotifyAuthorizationException $e)
     {
-    // invalid ID & Secret provided 
-    return view('pages.errorSpotifyPage');
-    $e->getAPIResponse(); // Get the JSON API response.
-
+        // invalid ID & Secret provided 
+        return view('pages.errorSpotifyPage');
+        $e->getAPIResponse(); // Get the JSON API response.
     }
 
+            //Stores and retrieves specific data from the data sent by the API
+            try 
+            {
 
+                    //Spotify Artist/Band URL
+                    $SpotifyURL = $result[0]['album']['artists'][0]['external_urls']['spotify'];
+                                
+                    //Spotify Artist/Band Name
+                    $SpotifyName = $result[0]['album']['artists'][0]['name']; 
 
+                    //Spotify Artist/Band Image
+                    $SpotifyImage = $result[0]['album']['images'][0]['url'];
 
+                    //Spotify Artist/Band Album tracks
+                    $SpotifyAlbumView = $result[0]['album']['id'];
 
-    
-    
-   
-
-
-
-            //Exception handling  - If the user enter values in which result the API being unable to find data
-            try {
-
-                $SpotifyURL = $result[0]['album']['artists'][0]['external_urls']['spotify'];
-    
-                $SpotifyName = $result[0]['album']['artists'][0]['name']; 
-    
-                $SpotifyImage = $result[0]['album']['images'][0]['url'];
-    
-                $SpotifyFollowBtn = $result[0]['album']['artists'][0]['uri'];
-    
-                $SpotifyAlbumView = $result[0]['album']['id'];
-    
+                //Returns to display webpage
                 return view('pages.spotifyApi')->with('result', $result)->with('SpotifyName',$SpotifyName)->with('SpotifyURL' , $SpotifyURL)->with('SpotifyImage', $SpotifyImage)->with('SpotifyAlbumView' , $SpotifyAlbumView);
     
-    
-                } 
-                catch(\Exception $ex) 
-                {
+            } 
+            catch(\Exception $ex) 
+            {
                 //Return user to error page
                 return view('pages.errorSpotifyPage');
-                }
+            }
     
+       }
     
-    }
-    
-
-        
     }

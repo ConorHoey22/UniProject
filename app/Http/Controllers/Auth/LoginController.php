@@ -41,6 +41,7 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    //Logout function -  the current user
     public function logout(Request $request)
     {
         Auth::logout();

@@ -35,10 +35,10 @@
       @auth
       <li class="active"><a href="{{ url('/dashboard') }}">Home</a></li>
   
-      </ul>
+      
       <!--This is the right side of the Navbar--> <!--Still can see login + signup FIX-->
       @endauth
-      <li class="active"><a href="{{ url('register') }}">Sign Up</a></li>
+      <li><a href="{{ url('register') }}">Sign Up</a></li>
         <li><a href="{{ url('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
       @endif

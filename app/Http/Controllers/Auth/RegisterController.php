@@ -31,10 +31,6 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/dashboard';
 
-
-
-
-
     /**
      * Create a new controller instance.
      *
@@ -44,15 +40,6 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
-
-
-
-
-
-
-
-
-
 
     /**
      * Get a validator for an incoming registration request.
@@ -64,7 +51,7 @@ class RegisterController extends Controller
 
 
 
-
+//Validation before inserted into the database
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -76,9 +63,6 @@ class RegisterController extends Controller
             'userType' => 'required|string|max:255',
             'genre' => 'required|string|max:255',
             'profileDescription' => 'required|string|max:255',
-         //   'dailyMusicMatch' => 'required|string|max:255',
-           
-     
 
         ]);
     }
@@ -89,6 +73,8 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
+
+     //Creates a user
     protected function create(array $data)
     {
         return User::create([
@@ -100,12 +86,6 @@ class RegisterController extends Controller
             'userType' => $data['userType'],
             'genre' => $data['genre'],
             'profileDescription' => $data['profileDescription'],
-            //'dailyMusicMatch' => $data['dailyMusicMatch'],
-            //We need a variable to set which genre of music they release  - If a band/artist
-          
-            
-            
-         
 
         ]);
     }
