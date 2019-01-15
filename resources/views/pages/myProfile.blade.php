@@ -12,48 +12,45 @@
                                     <p>
                                     <!--Profile Image-->
 
+
+
+
+
+
+
+
                                     
                                     </p>
                                 </div>
 
                                 <!--Username of current Logged in user--  {{ Auth::user()->username }} -->
                                 <div class = "displayCurrentUser">
-                                    @if (Auth::id() == $user->username)
+                                  
 
                                             <p> {{ Auth::user()->username}} </p>
-                                    @else
-
-                                            <p> {{ $user->username }} </p>
-                                    @endif
+                            
                                  
                                 </div>
 
                                 <!--Location of current Logged in user-->
                                 <div class = "displayLocation">
                                
-                                @if (Auth::id() == $user->username)
+                              
 
                                         <p> {{ Auth::user()->location}} </p>
 
-                                @else
-                                        <p> {{ $user->location }} </p>
-
-                                @endif
+                            
 
                                 </div>
 
                                 <!--Type of UserType of current Logged in user-->
                                 <div class = "displayUserType">
                                    
-                                @if (Auth::id() == $user->username)
+                         
 
                                     <p> {{ Auth::user()->userType}} </p>
 
-                                @else
-
-                                    <p> {{ $user->userType }} </p>
-
-                                @endif
+                                
                                 </div>
 
                                 <!--Spotify of current Logged in user-->
@@ -82,18 +79,17 @@
                                     <!--Users can attach something that they want to promote - e.g a new music video-->
                                 </div>
 
-                                @if (Auth::id() == $user->username)
+                                
                                 <div class = "EditProfile">
                                     <!--Then an ablity to edit-->
                                     <button a href="{{ url('/editProfile') }}">EditProfile </button>
                                 </div>
-                                @endif
+                              
 
                                 <br>
 
 
-                            <!--Only the Authorised User can create a post-->   
-                                @if (Auth::id() == $user->username)
+                              
 
                                 <!-- Create a Post Form -->
                                 <section>
@@ -122,19 +118,18 @@
                                             </div>
                                         </form>
 
-                                 </section>     
-                                 @endif
+                                  </section>
 
+                                  <section class = "row posts">
+                                    <div class ="col-md-6 col-md-offst-3">
+                                     <header><h3>Posts</h3><header>
                                 
 
-
-
-
-
+                        
 
 
                                  @foreach ($posts as $UserPost)
-
+                                <article class = "post">
                                     <p> {{ $UserPost->postTitle}}</p>
                                     <p> {{ $UserPost->postContent}}</p>
 
@@ -149,14 +144,16 @@
                                         <a href = "">Like</a>
                                         <a href = "">Comment</a>
 
+                                        <a href="{{ route('post.delete', ['post_id' => $UserPost->id]) }}">Delete</a>
+                                        <button data-toggle="modal" data-toggle="modal" data-target="#edit-modal" href=""> Edit</button>
 
 
 
-                                    @if (Auth::id() == $user->username)
 
-                                    <a href="{{ route('post.delete', ['post_id' => $UserPost->id]) }}">Delete</a>
-                                    
-                                    @endif                          
+                      
+
+                           
+                                                     
 
 
 
@@ -173,42 +170,62 @@
                                         
                                     </div>
 
-
+                                </article>
                                 @endforeach
+                            </div>
+                            </section>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="edit-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Post</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+      
+       <form method="POST" action = "{{ route('updatePost',[$post->id])">
+
+
+              <div class="form-group">
+                
+    
+        <input class = "form-control" name="postTitle" id="postTitle" rows="1" placeholder="Update Title">
+        <br>
+        <input class = "form-control" name="postContent" id="postContent" rows="5" placeholder="Update Content"> 
+    
+        
+    
+    </div>
+        
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+        <button type="submit" id="submitUpdatePost" class="btn btn-success pull-right">Submit</button>
+     </form> 
+       
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<iframe allowtransparency="true" scrolling="no" frameborder="no" src="https://w.soundcloud.com/icon/?url=http%3A%2F%2Fsoundcloud.com%2F<?php echo $AuthSoundCloudWidget?> &color=black_white&size=32" style="width: 32px; height: 32px;"></iframe>
+
+
+    <iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/<?php echo $AuthSoundCloudProfile?>&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
 
 
 
 
 
-                                <iframe allowtransparency="true" scrolling="no" frameborder="no" src="https://w.soundcloud.com/icon/?url=http%3A%2F%2Fsoundcloud.com%2F<?php echo $user->soundCloudWidget?>&color=black_white&size=32" style="width: 32px; height: 32px;"></iframe>
-
-
-<iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/<?php echo $user->soundCloudProfile?>&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
-
-
-
-
-
-    <iframe src="https://open.spotify.com/follow/1/?uri=spotify:user:conorhoey1&size=detail&theme=light" width="300" height="56" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <iframe src="https://open.spotify.com/follow/1/?uri=spotify:user:conorhoey1&size=detail&theme=light" width="300" height="56" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe>
 
 
 

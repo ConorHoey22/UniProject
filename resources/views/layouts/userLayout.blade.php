@@ -8,8 +8,25 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Latest cdn CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
     
+
+
+
+    
+<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>-->
+
+
+
+
+
+
+
+
+
+
+
+
     <!--Cdn Jquery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -33,12 +50,12 @@
         <ul class="nav navbar-nav">
          @if (Route::has('login'))
          @auth
-          <li class="active"><a href="/dashboard">Home</a></li>
-          <li><a href="{{ url('/profile') }}">Profile</a></li>
+          <li class="active"><a href="{{ url('/userDashboard') }}">Home</a></li>
+          <li><a href="{{ url('/MyProfile') }}">Profile</a></li>
           <li><a href="{{ url('/dailyMusic') }}">Daily Music</a></li>
           <li><a href="{{ url('logout') }}">Log out</a></li>
         </ul>
-         <!--This is the right side of the Navbar--> <
+         <!--This is the right side of the Navbar--> 
         @endauth
      <!--This is the right side of the Navbar--> <!--Still can see login + signup FIX-->
       @endif
@@ -49,9 +66,13 @@
 
 <body>
   
+@include('include.errorMessage')
+
 @yield('content')
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src = "/js/posts.js"></script> 
 </body>
 
 </html>

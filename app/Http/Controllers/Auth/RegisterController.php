@@ -63,6 +63,9 @@ class RegisterController extends Controller
             'userType' => 'required|string|max:255',
             'genre' => 'required|string|max:255',
             'profileDescription' => 'required|string|max:255',
+            'soundCloudWidget' => 'required|string|max:255',
+            'soundCloudProfile' => 'required|string|max:255',
+
 
         ]);
     }
@@ -86,6 +89,9 @@ class RegisterController extends Controller
             'userType' => $data['userType'],
             'genre' => $data['genre'],
             'profileDescription' => $data['profileDescription'],
+            'soundCloudWidget' => $data['soundCloudWidget'],
+            'soundCloudProfile' => $data['soundCloudProfile'],
+
 
         ]);
     }

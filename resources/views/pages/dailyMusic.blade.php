@@ -76,5 +76,7 @@
                 
                 <!-- FILL DROPDOWN WITH SPOTIFY GENRE JSON FILE--->
                 <script src = "/js/populateGenres.js"></script>   
-              
+
+
+
 @endsection

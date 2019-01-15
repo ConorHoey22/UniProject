@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Login') }}</div>
                  <div class="card-body">
                     <!--Beginning of the Login Form - Values entered are sent to the LoginController-->
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('signinUser') }}">
                         @csrf
                         <!--Email-->
                         <div class="form-group row">

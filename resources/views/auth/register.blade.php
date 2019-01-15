@@ -10,7 +10,7 @@
                    <div class="card-body">
 
                      <!--Beginning of the Register Form - Values entered are sent to the RegisterController-->
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('postsignup') }}">
                         @csrf
                         <!--Username-->
                         <div class="form-group row">
@@ -112,13 +112,52 @@
                             <div class="col-md-6">
                                 <input id="profileDescription" type="text"  name="profileDescription" class= "form-control" required autofocus>
                             </div>
-                        </div>
+                    </div>
+
+
+                
+
+
+
+                     <!--SoundCloud Widget--   Not required --->
+                     <div class="form-group row">
+
+                            <label for="soundCloudWidget" class="col-md-4 col-form-label text-md-right">{{ __('Attach your SoundCloud Details:') }}</label>
+                            <div class="col-md-6">
+                                <input id="soundCloudWidget" type="text"  name="soundCloudWidget" class= "form-control">
+                            </div>
+
+
+                            <div class = howToGuide>
+                                <p> This is the creditionals you need to enter to obtain your soundCloudID</p>
+                            </div>
+
+
+
+                            
+
+                    </div>
+
+
+
+                     <!--SoundCloud Logo which link to your profile--   Not required -->
+                     <div class="form-group row">
+
+                            <label for="soundCloudProfile" class="col-md-4 col-form-label text-md-right">{{ __('Attach your SoundCloud Details:') }}</label>
+                            <div class="col-md-6">
+                                <input id="soundCloudProfile" type="text"  name="soundCloudProfile" class= "form-control">
+                            </div>
+                    </div>
+
+
+
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
+                                <input type="hidden" name="_token" value="{{ Session::token() }}">
                             </div>
                         </div>
                     </form>

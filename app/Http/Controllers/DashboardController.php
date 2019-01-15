@@ -11,19 +11,24 @@ class DashboardController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
+   
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      */
 
+     //Checks authorisation and if the user of the website is logged in. User will be redirected if not
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         return view('pages.dashboard');
     }
+
+
+  
 }

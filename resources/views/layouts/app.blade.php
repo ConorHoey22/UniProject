@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -27,13 +28,14 @@
       </button>
       <a class="navbar-brand" href="#">DiscoverMusic   </a> <!--Still need to link this--> 
     </div>
+    
     <div class="collapse navbar-collapse" id="myNavbar">
 
     <!--This is the left side of the Navbar-->
       <ul class="nav navbar-nav">
       @if (Route::has('login'))
       @auth
-      <li class="active"><a href="{{ url('/dashboard') }}">Home</a></li>
+      <li class="active"><a href="{{ url('/userDashboard') }}">Home</a></li>
   
       
       <!--This is the right side of the Navbar--> <!--Still can see login + signup FIX-->
@@ -55,6 +57,9 @@
 <!--THIS CONTAINS THE NAVBAR-->
 
 <body>
+
+@include('include.errorMessage')
+
 
 @yield('content')
 
