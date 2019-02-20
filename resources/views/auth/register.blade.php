@@ -72,6 +72,23 @@
                             </div>
                         </div>
 
+
+                          <!--Age-->
+                          <div class="form-group row">
+                            <label for="age" class="col-md-4 col-form-label text-md-right">{{ __('Age(Use age ranges for a band profile):') }}</label>
+                               
+                            <div class="col-md-6">
+                                <select name="ageRange" id="ageRange" class="form-control input" required autofocus>
+                                </select>
+                            <!--Temporary form -->
+                                <br>
+                                
+                                <p>Enter your age below (*This can be changed*)</p>
+                                <input id="userAge" type="text"  name="userAge" class= "form-control" required autofocus>
+                            </div>
+                        </div>
+
+
                         <!--Location-->
                         <div class="form-group row">
                             <label for="location" class="col-md-4 col-form-label text-md-right">{{ __('Town/City:') }}</label>
@@ -85,7 +102,7 @@
                         <div class="form-group row">
                         <label for="userType" class="col-md-4 col-form-label text-md-right">{{ __('Type of user:') }}</label>
                             <div class="col-md-6">
-                                <select name = "userType"  class="form-control input">
+                                <select name = "userType" id="userType" class="form-control input">
                                     <option value="Listener">Listener</option>
                                     <option value="Artist">Artist</option>
                                     <option value="Band">Band</option>
@@ -93,18 +110,19 @@
                             </div>
                         </div>
 
-                    <!--Genre - Used for Profile Content-->
+                    <!--Prefered Genre - Used for Artist/Band-->
                      <div class="form-group row">
-                     <label for="genre" class="col-md-4 col-form-label text-md-right">{{ __('Please select a genre of music in which you enjoy listening which will help us send you a random song everyday:') }}</label>
+                     <label for="genre" class="col-md-4 col-form-label text-md-right">{{ __('Please select a genre of music you usually peform:') }}</label>
                    
                         <div class="col-md-6">
-                              <select name = "genre"  class="form-control input">
-                                  <option value="Pop">Pop</option>
-                                  <option value="Rock">Rock</option>
-                                  <option value="Folk">Folk</option>
+                              <select name = "genre" id="genre" class="form-control input" required autofocus>
+                                
                               </select>
                         </div>
                     </div>
+
+
+
   
                     <!--Description - Used for Profile Content-->
                      <div class="form-group row">
@@ -131,11 +149,7 @@
                             <div class = howToGuide>
                                 <p> This is the creditionals you need to enter to obtain your soundCloudID</p>
                             </div>
-
-
-
-                            
-
+                    
                     </div>
 
 
@@ -149,8 +163,282 @@
                             </div>
                     </div>
 
+                    
+                  <p>Choose 5 words that describe your style of music</p>
+<!--THIS WILL BE ONLY FOR ARTIST/BANDS-->
+                    <!--Word 1 -- Used to describe the artists/bands style of music-->
+                     <div class="form-group row">
+             
+                            <div class="col-md-6">
+                                <select name = "word1" id="word1" class="form-control input" required autofocus>
+                                </select>
+                            </div>
+                    </div>
+
+                    
+                    <!--Word 2-- Used to describe the artists/bands style of music-->
+                     <div class="form-group row">
+                                         
+                            <div class="col-md-6">
+                                <select name = "word2" id="word2" class="form-control input" required autofocus>
+                                </select>
+                            </div>
+                    </div>
+
+                     
+                    <!--Word 3-- Used to describe the artists/bands style of music-->
+                     <div class="form-group row">
+                                         
+                            <div class="col-md-6">
+                                <select name = "word3" id="word3" class="form-control input" required autofocus>
+                                </select>
+                            </div>
+                    </div>
+
+                     
+                    <!--Word 4-- Used to describe the artists/bands style of music-->
+                     <div class="form-group row">
+                                        
+                            <div class="col-md-6">
+                                <select name = "word4" id="word4" class="form-control input" required autofocus>
+                                </select>
+                            </div>
+                    </div>
+
+                     
+                    <!--Word 5-- Used to describe the artists/bands style of music-->
+                     <div class="form-group row">
+                                       
+                            <div class="col-md-6">
+                                <select name = "word5" id="word5" class="form-control input" required autofocus>
+                                </select>
+                            </div>
+                    </div>
 
 
+                       
+                    <!--Similarity Artist/Band--> <!--Artist/ BAnd only-->
+                    <div class="form-group row">
+                    <label for="similarity" class="col-md-4 col-form-label text-md-right">{{ __('Enter a similar band/artist with the same style of music:') }}</label>
+                                <div class="col-md-6">
+                                <input id="similarity" type="text"  name="similarity" class= "form-control input" required autofocus>
+                                </div>
+                    </div>
+
+                     <!--Instruments used in your music (should be able to enter more than one) -->
+                     <div class="form-group row">
+                    <label for="instruments" class="col-md-4 col-form-label text-md-right">{{ __('Enter the main instruments used in your music:') }}</label>
+                                <div class="col-md-6">
+                                <input id="instruments" type="text"  name="instruments" class= "form-control input" required autofocus>
+                                </div>
+                    </div>
+                
+
+                <!--Recommendation User Details for the Recommendation System-->
+
+                <div class = "getRecommendationInfo">
+
+<div class = "RecommendationTitle">
+    <h1> Lets find some artists or bands which you may like to listen to!</h1>
+</div>
+
+
+<!--Genre Title-->
+<div class = "GenreTitle">
+    <p>Select some genres which you prefer!</p>
+</div>
+
+<!--Select some Genres from the list-->
+<div class = "GenreList">
+            <div class="form-group row">
+                 <br>
+             <label for="Select some genres" class="col-md-4 col-form-label text-md-right">{{ __('Select some genres') }}</label>
+                <div class="col-md-6">
+                    
+                         <!-- Genre Dropdown Selection-->
+                        <select name="recommendationGenre" id="recommendationGenre" class="form-control input" required autofocus>
+                        </select>
+              
+                </div>
+            </div>    
+</div>
+<div class = "Words Title">
+    <p>Select some words that describe the music you like to listen to </p>
+</div
+>
+<!-- Words to find a match   / Selection of a few words  --- FIX THIS !!  -->
+<div class = "WordsList" >
+            <div class="form-group row">
+                 <br>
+             <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select some words') }}</label>
+                <div class="col-md-6">
+                 
+                         <!-- Word Selection --> 
+                        <select name="recommendationWord1" id="recommendationWord1" class="form-control input" required autofocus>
+                        </select>
+                     
+                </div>
+            </div>    
+
+            <!--Word2-->
+            <div class="form-group row">
+                 <br>
+             <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select some words') }}</label>
+                <div class="col-md-6">
+                 
+                         <!-- Word Selection -->
+                        <select name="recommendationWord2" id="recommendationWord2" class="form-control input">
+                        </select>
+                     
+                </div>
+            </div>  
+
+            <!--Word3-->
+           <div class="form-group row">
+                 <br>
+             <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select some words') }}</label>
+                <div class="col-md-6"> 
+                
+                         <!-- Word Selection -->
+                         <select name="recommendationWord3" id="recommendationWord3" class="form-control input">
+                        </select>
+                     
+                </div>
+            </div>     
+
+            <!--Word4-->
+            <div class="form-group row">
+                 <br>
+             <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select some words') }}</label>
+                <div class="col-md-6">
+                 
+                         <!-- Genre Dropdown Selection--> 
+                        <select name="recommendationWord4" id="recommendationWord4" class="form-control input">
+                        </select>
+                     
+                </div>
+            </div>  
+
+            <!--Word5-->
+            <div class="form-group row">
+                 <br>
+             <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select some words') }}</label>
+                <div class="col-md-6">
+                 
+                         <!-- Genre Dropdown Selection--> 
+                        <select name="recommendationWord5" id="recommendationWord5" class="form-control input">
+                        </select>
+                     
+                </div>
+            </div>
+
+
+
+
+
+</div>
+
+
+
+<!-- Age range of Artist/Band -->
+<div class = "AgeRange">
+    <div class="form-group row">
+                 <br>
+             <label for="Select an age range" class="col-md-4 col-form-label text-md-right">{{ __('Select an age range') }}</label>
+                <div class="col-md-6">
+                    
+                         <!-- Age Range Dropdown Selection-->
+                        <select name="recommendationAge" id="recommendationAge" class="form-control input">
+                        </select>
+                     
+                </div>
+            </div>    
+</div>
+</div>
+
+<!-- Location of the Artist/Band -->
+<div class = "LocationInput">
+<div class="form-group row">
+                 <br>
+             <label for="location" class="col-md-4 col-form-label text-md-right">{{ __('Enter a location') }}</label>
+                <div class="col-md-6">
+                    
+                         <!-- Location input box-->
+                         <input id="recommendationLocation" type="text"  name="recommendationLocation" class= "form-control">
+
+                    
+                </div>
+            </div>    
+</div>
+</div>
+
+<!-- Instruments the artist/band use in their music -->  <!-- list or Input -->
+<!-- Then they enter an instruments at registeration or edit , and it is added to the json file which contains a list of instruments-->
+<div class = "InstrumentsList">
+<div class="form-group row">
+                    <br>
+                <label for="Select some instruments" class="col-md-4 col-form-label text-md-right">{{ __('Enter the main instrument you are looking for') }}</label>
+                    <div class="col-md-6">
+                        
+                            <!-- Instruments List Dropdown Selection-->
+                            
+
+                            <!--OR WE DECIDE LATER WHICH -->
+                                  <!-- Instruments input box-->
+                            <input id="recommendationInstruments" type="text"  name="recommendationInstruments" class= "form-control"> 
+
+
+
+                            
+                    
+                    </div>
+                </div>    
+    </div>
+</div>
+<!-- Similar to .. (Mumford and Sons) --> <!-- could we have the an artist/band user enter a similar band or artist which plays the same style of music-->
+<!-- Then the entered band is added to the json file which contains a list of artist and bands-->
+<div class = "Similar">
+    <div class="form-group row">
+                    <br>
+                <label for="Select some similar artist or band" class="col-md-4 col-form-label text-md-right">{{ __('Select some artists or bands') }}</label>
+                    <div class="col-md-6">
+                     
+                            <!-- similarLisr List Dropdown Selection-->
+                            <input id="recommendationSimilarity" type="text"  name="recommendationSimilarity" class= "form-control">
+
+                
+                    </div>
+                </div>    
+    </div>
+
+
+
+
+
+
+
+<!-- UserType-->
+<div class = "userType">
+    <div class="form-group row">
+                 <br>
+             <label for="Select type of user" class="col-md-4 col-form-label text-md-right">{{ __('Select a type of user') }}</label>
+                <div class="col-md-6">
+                    
+                         <!-- Age Range Dropdown Selection-->
+                        <select name="recommendationUserType" id="recommendationUserType" class="form-control input">
+                            <option value="Artist">Artist</option>
+                            <option value="Band">Band</option>
+                            <option value="Artist/Band">Artist or Band</option>
+                        </select>
+                     
+                </div>
+            </div>    
+    </div>
+
+
+  
+
+   
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
@@ -160,10 +448,34 @@
                                 <input type="hidden" name="_token" value="{{ Session::token() }}">
                             </div>
                         </div>
-                    </form>
-                </div>
+
+
+
+
+
+                       </form>
+                    </div>
+                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+        <!-- FILL AGE RANGES DROPDOWN WITH JSON FILE--->
+        <script src = "/js/populateAgeRanges.js"></script>   
+
+         <!-- FILL DROPDOWN WITH GENRE JSON FILE--->
+         <script src = "/js/populateGenres.js"></script>   
+
+           <!-- FILL DROPDOWN WITH Words JSON FILE--->
+           <script src = "/js/populateWords.js"></script>   
+
+
+
+
+
+
 @endsection

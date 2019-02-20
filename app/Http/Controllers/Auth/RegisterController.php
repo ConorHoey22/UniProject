@@ -58,13 +58,22 @@ class RegisterController extends Controller
             'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'ageRange' => 'required|string|max:255',
+            'userAge' => 'required|string|max:255',
             'country' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'userType' => 'required|string|max:255',
-            'genre' => 'required|string|max:255',
+            'preferredGenre' => 'required|string|max:255',
             'profileDescription' => 'required|string|max:255',
             'soundCloudWidget' => 'required|string|max:255',
             'soundCloudProfile' => 'required|string|max:255',
+            'word1' => 'required|string|max:255',
+            'word2' => 'required|string|max:255',
+            'word3' => 'required|string|max:255',
+            'word4' => 'required|string|max:255',
+            'word5' => 'required|string|max:255',
+            'similarity' => 'required|string|max:255',
+            'instruments' => 'required|string|max:255',
 
 
         ]);
@@ -84,15 +93,22 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'ageRange' => $data['ageRange'],
+            'userAge' => $data['userAge'],
             'country' => $data['country'],
             'location' => $data['location'],
             'userType' => $data['userType'],
-            'genre' => $data['genre'],
+            'preferredGenre' => $data['preferredGenre'],
             'profileDescription' => $data['profileDescription'],
             'soundCloudWidget' => $data['soundCloudWidget'],
             'soundCloudProfile' => $data['soundCloudProfile'],
-
-
+            'word1' => $data['word1'],
+            'word2' => $data['word2'],
+            'word3' => $data['word3'],
+            'word4' => $data['word4'],
+            'word5' => $data['word5'],
+            'similarity' => $data['similarity'],
+            'instruments' => $data['instruments'],
         ]);
     }
 }

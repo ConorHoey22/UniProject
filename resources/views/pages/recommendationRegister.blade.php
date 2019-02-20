@@ -1,9 +1,16 @@
+@extends('layouts.userLayout')
+
+
+@section('content')
 <div class = "getRecommendationInfo">
 
         <div class = "RecommendationTitle">
             <h1> Lets find some artists or bands which you may like to listen to!</h1>
         </div>
-
+      
+      
+        <form method="POST" action="{{ route('createRecommendation') }}">
+        @csrf
     <!--Genre Title-->
         <div class = "GenreTitle">
             <p>Select some genres which you prefer!</p>
@@ -15,14 +22,11 @@
                          <br>
                      <label for="Select some genres" class="col-md-4 col-form-label text-md-right">{{ __('Select some genres') }}</label>
                         <div class="col-md-6">
-                            <form method="POST" action="">
-                                @csrf 
+                            
                                  <!-- Genre Dropdown Selection-->
-                                <select name="genreList" id="genreList" class="form-control input" required>
+                                <select name="preferredGenre" id="preferredGenre" class="form-control input" required autofocus>
                                 </select>
-                                <br>
-                                <input type="submit" value="Submit">
-                            </form> 
+                      
                         </div>
                     </div>    
         </div>
@@ -34,14 +38,11 @@
                          <br>
                      <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select some words') }}</label>
                         <div class="col-md-6">
-                            <form method="POST" action="">
-                                @csrf 
-                                 <!-- Genre Dropdown Selection-->
-                                <select name="wordList" id="wordList" class="form-control input" required>
+                         
+                                 <!-- Genre Dropdown Selection--> <!--need to change name of the field-->
+                                <select name="word1" id="word1" class="form-control input" required autofocus>
                                 </select>
-                                <br>
-                                <input type="submit" value="Submit">
-                            </form> 
+                             
                         </div>
                     </div>    
         </div>
@@ -49,19 +50,16 @@
     </div>
 
     <!-- Age range of Artist/Band -->
-    <div class = "AgeRangeList">
+    <div class = "AgeRange">
         <div class="form-group row">
                          <br>
                      <label for="Select an age range" class="col-md-4 col-form-label text-md-right">{{ __('Select an age range') }}</label>
                         <div class="col-md-6">
-                            <form method="POST" action="">
-                                @csrf 
+                            
                                  <!-- Age Range Dropdown Selection-->
-                                <select name="ageRangeList" id="ageRangeList" class="form-control input">
+                                <select name="ageRange" id="ageRange" class="form-control input">
                                 </select>
-                                <br>
-                                <input type="submit" value="Submit">
-                            </form> 
+                             
                         </div>
                     </div>    
         </div>
@@ -71,16 +69,13 @@
     <div class = "LocationInput">
         <div class="form-group row">
                          <br>
-                     <label for="Enter a Location" class="col-md-4 col-form-label text-md-right">{{ __('Enter a location') }}</label>
+                     <label for="location" class="col-md-4 col-form-label text-md-right">{{ __('Enter a location') }}</label>
                         <div class="col-md-6">
-                            <form method="POST" action="">
-                                @csrf 
+                            
                                  <!-- Location input box-->
-                                 <input id="locationOfMatch" type="text"  name="locationOfMatch" class= "form-control">
+                                 <input id="location" type="text"  name="location" class= "form-control">
 
-                                <br>
-                                <input type="submit" value="Submit">
-                            </form> 
+                            
                         </div>
                     </div>    
         </div>
@@ -93,21 +88,18 @@
                             <br>
                         <label for="Select some instruments" class="col-md-4 col-form-label text-md-right">{{ __('Select some instruments') }}</label>
                             <div class="col-md-6">
-                                <form method="POST" action="">
-                                    @csrf 
+                                
                                     <!-- Instruments List Dropdown Selection-->
-                                    <select name="instrumentList" id="instrumentList" class="form-control input">
-                                    </select>
+                                    
 
                                     <!--OR WE DECIDE LATER WHICH -->
                                           <!-- Instruments input box-->
-                                    <input id="instrumentOfMatch" type="text"  name="instrumentOfMatch" class= "form-control">
+                                    <input id="instruments" type="text"  name="instruments" class= "form-control"> 
 
 
 
-                                    <br>
-                                    <input type="submit" value="Submit">
-                                </form> 
+                                    
+                            
                             </div>
                         </div>    
             </div>
@@ -119,17 +111,14 @@
                             <br>
                         <label for="Select some similar artist or band" class="col-md-4 col-form-label text-md-right">{{ __('Select some artists or bands') }}</label>
                             <div class="col-md-6">
-                                <form method="POST" action="">
-                                    @csrf 
+                             
                                     <!-- similarLisr List Dropdown Selection-->
-                                    <select name="similarLists" id="similarLists" class="form-control input">
-                                    </select>
+                                    <input id="similarity" type="text"  name="similarity" class= "form-control">
 
                          
 
-                                    <br>
-                                    <input type="submit" value="Submit">
-                                </form> 
+                                
+                              
                             </div>
                         </div>    
             </div>
@@ -138,34 +127,51 @@
 
 
     </div>
-    <!-- Followers within this website --> <!-- Input or List of Ranges  -->
-    <div class = "Followers">
+    
 
-           <div class="form-group row">
-                            <br>
-                        <label for="Select the amount of followers" class="col-md-4 col-form-label text-md-right">{{ __('Select the amount of followers they may have') }}</label>
-                            <div class="col-md-6">
-                                <form method="POST" action="">
-                                    @csrf 
-                                    <!-- Instruments List Dropdown Selection-->
-                                    <select name="followersList" id="followersList" class="form-control input">
-                                    </select>
-
-                                    <!--OR WE DECIDE LATER WHICH -->
-                                          <!-- Instruments input box-->
-                                    <input id="followerList" type="text"  name="followerList" class= "form-control">
-
-
-
-                                    <br>
-                                    <input type="submit" value="Submit">
-                                </form> 
-                            </div>
-                        </div>    
-            </div>
-
+        <!-- Age range of Artist/Band -->
+        <div class = "userType">
+            <div class="form-group row">
+                         <br>
+                     <label for="Select type of user" class="col-md-4 col-form-label text-md-right">{{ __('Select a type of user') }}</label>
+                        <div class="col-md-6">
+                            
+                                 <!-- Age Range Dropdown Selection-->
+                                <select name="userType" id="userType" class="form-control input">
+                                    <option value="Artist">Artist</option>
+                                    <option value="Band">Band</option>
+                                </select>
+                             
+                        </div>
+                    </div>    
+        </div>
     </div>
 
+            <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Create Recommendation') }}
+                                </button>
+                                <input type="hidden" name="_token" value="{{ Session::token() }}">
+                            </div>
+             </div>
+
+            </form>
+       
+    </div>
 </div>
 
 
+
+
+
+                <!-- FILL AGE RANGES DROPDOWN WITH JSON FILE--->
+                <script src = "/js/populateAgeRanges.js"></script>   
+
+                 <!-- FILL DROPDOWN WITH GENRE JSON FILE--->
+                 <script src = "/js/populateGenres.js"></script>   
+
+                   <!-- FILL DROPDOWN WITH Words JSON FILE--->
+                   <script src = "/js/populateWords.js"></script>   
+
+@endsection

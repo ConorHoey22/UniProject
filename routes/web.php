@@ -26,10 +26,15 @@
     Route::post('/signin','UserController@postSignIn')->name('signinUser');
 
 Route::post('/createPost', 'UserController@createPost')->name('createPost');
+
+Route::post('/createRecommendation', 'UserController@createRecommendation')->name('createRecommendation');
+
 //Route::get('/userProfile', 'UserController@index')->name('profile');
 //Route::get('/deletePost', 'PostsController@getDelete')->name('postDelete');
 
 //Route::get('/deletePost/{postID}', 'PostsController@getDelete')->name('delPost');
+
+
 
 Route::get('/profile/{id}', [
     'uses' => 'UserController@show',
@@ -54,6 +59,19 @@ Route::get('/updatePost', [
 Route::get('/delete-post/{post_id}', [
     'uses' => 'UserController@getDeletePost',
     'as' => 'post.delete',
+    'middleware' => 'auth'
+]);
+
+
+Route::get('/MyRecommendation', [
+    'uses' => 'UserController@insertRecommendation',
+    'as' => 'MyRecommendation',
+    'middleware' => 'auth'
+]);
+
+Route::get('/MyDashboard', [
+    'uses' => 'UserController@MyDashboard',
+    'as' => 'MyDashboard',
     'middleware' => 'auth'
 ]);
 

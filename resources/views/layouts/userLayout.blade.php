@@ -50,7 +50,7 @@
         <ul class="nav navbar-nav">
          @if (Route::has('login'))
          @auth
-          <li class="active"><a href="{{ url('/userDashboard') }}">Home</a></li>
+          <li class="active"><a href="{{ url('/MyDashboard') }}">Home</a></li>
           <li><a href="{{ url('/MyProfile') }}">Profile</a></li>
           <li><a href="{{ url('/dailyMusic') }}">Daily Music</a></li>
           <li><a href="{{ url('logout') }}">Log out</a></li>

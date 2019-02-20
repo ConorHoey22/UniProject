@@ -23,8 +23,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password','country','location','userType','genre','profileDescription','soundCloudWidget','soundCloudProfile',
+        'username', 'email', 'password','ageRange', 'userAge','country','location','userType','genre','profileDescription','soundCloudWidget','soundCloudProfile','word1'.'word2','word3','word4','word5','similarity','instruments','recommendationGenre','recommendationWord1','recommendationWord2','recommendationWord3','recommendationWord4','recommendationWord5','recommendationAge','recommendationLocation','recommendationInstruments','recommendationSimilarity','recommendationUserType',
     ];
+
+    
 
 
      /**
@@ -46,7 +48,7 @@ class User extends Authenticatable
     }
 
     
-    public function recommendation()
+    public function recommendation() // dont think we need this
     {
         //Relationship
         return $this->hasOne('App\Recommendation');
