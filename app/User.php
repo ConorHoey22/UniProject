@@ -23,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password','ageRange', 'userAge','country','location','userType','genre','profileDescription','soundCloudWidget','soundCloudProfile','word1'.'word2','word3','word4','word5','similarity','instruments','recommendationGenre','recommendationWord1','recommendationWord2','recommendationWord3','recommendationWord4','recommendationWord5','recommendationAge','recommendationLocation','recommendationInstruments','recommendationSimilarity','recommendationUserType',
+        'username', 'email', 'password','ageRange', 'userAge','country','location','userType','genre','profileDescription','soundCloudWidget','soundCloudProfile','word1'.'word2','word3','word4','word5','similarity','instruments','recommendationGenre','recommendationWord1','recommendationWord2','recommendationWord3','recommendationWord4','recommendationWord5','recommendationAge','recommendationLocation','recommendationInstruments','recommendationSimilarity','recommendationUserType', 'image'
     ];
 
     

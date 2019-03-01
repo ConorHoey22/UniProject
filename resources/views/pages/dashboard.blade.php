@@ -11,19 +11,36 @@
 
                     <div class="card-body">
                        
-                        <div class="recommendations">
+                        <div class="recommendationsWords">
 
                             <p>We recommend you to check out!</p>
+                                
+                                <div class = "recommendedArtistByWords">
+                                Artist based on the recommendation words, you chose
+                                    @foreach ($recommendationArtistWordsQuery as $selectedUser)
+                                <!--This is where we get the image-->
+                                        <p> {{ $selectedUser->username}}</p>  
+                                        <p> {{ $selectedUser->userAge }}</p>
+                                        <p>Click here to check them out! </p>
+                                     
+                                    @endforeach   
+                                </div>
 
-                                @foreach ($recommendationQuery as $selectedUser)
-                            
-                                    <p> {{ $selectedUser->username}}</p>  
 
-                                @endforeach   
+                                <div class = "recommendedBandByWords">
+                                Band based on the recommendation words, you chose
+                                    @foreach ($recommendationBandWordsQuery as $selectedUser)
+                                
+                                        <p> {{ $selectedUser->username}}</p>  
+                                        <p> {{ $selectedUser->userAge }}</p>
+                                        <p>Click here to check them out! </p>
+                        
+                                    @endforeach   
+                                </div>
 
                            
                            
-                            <p>Edit Recommentdation</p>
+                            <button>Edit Recommentdation</button>
 
 
 
@@ -39,6 +56,8 @@
                             @foreach ($genreMatch as $selectedUser)
 
                                 <p> {{ $selectedUser->username}}</p>  
+                                <p> {{ $selectedUser->userAge }}</p>
+                                <p>Click here to check them out! </p>
 
                             @endforeach   
 
@@ -51,7 +70,9 @@
 
                             @foreach ($locationMatch as $selectedUser)
 
-                                 <p> {{ $selectedUser->username}}</p>  
+                                 <p> {{ $selectedUser->username}}</p>
+                                 <p> {{ $selectedUser->userAge }}</p>  
+                                 <p>Click here to check them out! </p>
 
                             @endforeach   
 
@@ -66,8 +87,10 @@
 
                             @foreach ($randomArtistUser as $selectedUser)
                         
-                                <p> {{ $selectedUser->username}}</p>  
-
+                                <p> {{ $selectedUser->username }}</p>  
+                                <p> {{ $selectedUser->userAge }}</p>
+                                <p>Click here to check them out! </p>
+                                
                             @endforeach   
 
                         </div>
@@ -80,6 +103,8 @@
                             @foreach ($randomBandUser as $selectedUser)
                         
                                 <p> {{ $selectedUser->username}}</p>  
+                                <p> {{ $selectedUser->userAge }}</p>
+                                <p>Click here to check them out! </p>
 
                             @endforeach   
 

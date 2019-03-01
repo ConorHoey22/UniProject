@@ -49,6 +49,8 @@ class CreateUsersTable extends Migration
             $table->string('recommendationSimilarity');
             $table->string('recommendationUserType');
 
+            $table->string('image')->default('default.jpg');
+
 
             // $table->string('dailyMusicMatch')->default('Default'); //CHange this , may create a bug
             $table->remembertoken(); /*BUG*/

@@ -35,6 +35,13 @@ Route::post('/createRecommendation', 'UserController@createRecommendation')->nam
 //Route::get('/deletePost/{postID}', 'PostsController@getDelete')->name('delPost');
 
 
+Route::get('profile', 'UserController@profile');
+
+Route::post('profile', 'UserController@update_image');
+
+
+
+
 
 Route::get('/profile/{id}', [
     'uses' => 'UserController@show',

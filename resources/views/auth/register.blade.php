@@ -122,17 +122,20 @@
                     </div>
 
 
+<!--Profile Image -->
+                    <div class="form-group row">
+                        <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Image (optional)') }}</label>
 
-  
-                    <!--Description - Used for Profile Content-->
-                     <div class="form-group row">
-                            <label for="profileDescription" class="col-md-4 col-form-label text-md-right">{{ __('Description:') }}</label>
-                            <div class="col-md-6">
-                                <input id="profileDescription" type="text"  name="profileDescription" class= "form-control" required autofocus>
-                            </div>
+                        <div class="col-md-6">
+                             <input type="file" class="form-control" name="image" id="image">
+                        </div>
                     </div>
 
-
+<!--Profile Description-->
+                    <label for="profileDescription" class="col-md-4 col-form-label text-md-right">{{ __('Profile Description:') }}</label>
+                            <div class="col-md-6">
+                                <input id="profileDescription" type="text"  name="profileDescription" class= "form-control">
+                            </div>
                 
 
 

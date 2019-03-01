@@ -10,6 +10,9 @@ use App\User;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+
 use Auth;
 
 use DB;
@@ -27,7 +30,7 @@ class UserController extends Controller
     $posts = \Auth::user()->posts()->get();
 
 
-
+    $user = Auth::user();
 
 
     $AuthSoundCloudWidget = Auth::user()->soundCloudWidget;
@@ -36,7 +39,7 @@ class UserController extends Controller
 
 
 
-    return view('pages.myProfile')->with('posts', $posts )->with('AuthSoundCloudWidget', $AuthSoundCloudWidget)->with('AuthSoundCloudProfile', $AuthSoundCloudProfile);
+    return view('pages.myProfile')->with('posts', $posts )->with('AuthSoundCloudWidget', $AuthSoundCloudWidget)->with('AuthSoundCloudProfile', $AuthSoundCloudProfile)->with('user', $user);
 
 
 
@@ -102,6 +105,33 @@ class UserController extends Controller
 
        
     }
+
+
+    public function update_image(Request $request){
+
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $user = Auth::user();
+
+        $imageName = $user->id.'_image'.time().'.'.request()->image->getClientOriginalExtension();
+
+        $request->image->storeAs('images',$imageName);
+
+        $user->image = $imageName;
+        $user->save();
+
+        return back()
+            ->with('success','You have updated image.');
+
+
+            //NEED VALIDATION FOR invalid formats
+
+    }
+
+
+
         
     public function updatePost(Request $request, Posts $post)
     {
@@ -204,7 +234,7 @@ class UserController extends Controller
             'recommendationInstruments' => 'required|string|max:255',
             'recommendationSimilarity' => 'required|string|max:255',
             'recommendationUserType' => 'required|string|max:255',
-
+            
         ]);
 
         //Requests 
@@ -239,7 +269,7 @@ class UserController extends Controller
         $recommendationInstruments = $request['recommendationInstruments'];
         $recommendationSimilarity = $request['recommendationSimilarity'];
         $recommendationUserType = $request['recommendationUserType'];
-     
+
 
        
 
@@ -276,10 +306,7 @@ class UserController extends Controller
         $user->recommendationInstruments = $recommendationInstruments;
         $user->recommendationSimilarity = $recommendationSimilarity;
         $user->recommendationUserType= $recommendationUserType;
-
-
-   
-        
+      
 
         $user->save();
         
@@ -340,24 +367,23 @@ class UserController extends Controller
             ->whereIn('word4', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
             ->paginate(2);
             */
-            
- // THIS IS USERTYPE,GENRE,WORDS Query (Working)
-$recommendationQuery1=  User::where('id', '<>', Auth::user()->id)
-->select('username')
-->where('id', '!=', Auth::id()) // Can't be the  current Auth User Details *Required*
-->where('genre', '=' , Auth::user()->recommendationGenre) // This is a required where clause for all statements  *Required*
-->where('userType', '=' , Auth::user()->recommendationUserType) // Find the userType they have requested *Required*
-->where(function ($query) {
-    $query->whereIn('word1', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-          ->orWhereIn('word2', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-          ->orWhereIn('word3', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-          ->orWhereIn('word4', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-          ->orWhereIn('word5', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5]);
-}) 
-->paginate(6); // NEED TO DETERMINE HOW MANY USERS WILL BE RETURNED
+          
 
 
-            //What if no user is found we need to tell the user to edit their recommendation details
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //Recommendated UserType , Genre 
@@ -377,11 +403,18 @@ $recommendationAvgMatch = DB::table('users')
 //and find all the users with at least one of those words(they have enter that describes their band or themselves)
 
 
+//Artist match based on Words
+//$recommendationWordsQuery=  User::where('id', '<>', Auth::user()->id)
+//->select('username' , 'location')
+//->where('userType', '=' , 'Artist') // Find the userType they have requested *Required*
 
-$recommendationQuery=  User::where('id', '<>', Auth::user()->id)
-->select('username')
+
+
+$recommendationArtistWordsQuery= DB::table('users')
+
 ->where('id', '!=', Auth::id()) // Can't be the  current Auth User Details *Required*
-->where('userType', '=' , Auth::user()->recommendationUserType) // Find the userType they have requested *Required*
+->where('userType', '=' , 'Artist') // Find the userType they have requested *Required*
+
 ->where(function ($query) {
     $query->whereIn('word1', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
           ->orWhereIn('word2', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
@@ -389,9 +422,63 @@ $recommendationQuery=  User::where('id', '<>', Auth::user()->id)
           ->orWhereIn('word4', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
           ->orWhereIn('word5', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5]);
 }) 
-->paginate(6); // NEED TO DETERMINE HOW MANY USERS WILL BE RETURNED
+->paginate(5); // NEED TO DETERMINE HOW MANY USERS WILL BE RETURNED
+//->paginate(6);
 
 
+
+//Band match based on Words
+$recommendationBandWordsQuery=  User::where('id', '<>', Auth::user()->id)
+
+->where('userType', '=' , 'Band') // Find the userType they have requested *Required*
+->where(function ($query) {
+    $query->whereIn('word1', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
+          ->orWhereIn('word2', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
+          ->orWhereIn('word3', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
+          ->orWhereIn('word4', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
+          ->orWhereIn('word5', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5]);
+}) 
+->paginate(5); // NEED TO DETERMINE HOW MANY USERS WILL BE RETURNED
+
+
+
+
+
+
+
+
+ // THIS IS USERTYPE = Artist,GENRE,WORDS Query (Working) // BASED ON WORDS
+ $recommendationArtistQuery=  User::where('id', '<>', Auth::user()->id)
+
+ ->where('id', '!=', Auth::id()) // Can't be the  current Auth User Details *Required*
+ ->where('genre', '=' , Auth::user()->recommendationGenre) // This is a required where clause for all statements  *Required*
+ ->where('userType', '=' , 'Artist') // Find the userType
+ ->where(function ($query) {
+     $query->whereIn('word1', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
+           ->orWhereIn('word2', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
+           ->orWhereIn('word3', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
+           ->orWhereIn('word4', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
+           ->orWhereIn('word5', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5]);
+ }) 
+ ->paginate(6); // NEED TO DETERMINE HOW MANY USERS WILL BE RETURNED
+ 
+ 
+             //What if no user is found we need to tell the user to edit their recommendation details
+ 
+ // THIS IS USERTYPE = Artist,GENRE,WORDS Query (Working)
+ $recommendationBandQuery=  User::where('id', '<>', Auth::user()->id)
+
+ ->where('id', '!=', Auth::id()) // Can't be the  current Auth User Details *Required*
+ ->where('genre', '=' , Auth::user()->recommendationGenre) // This is a required where clause for all statements  *Required*
+ ->where('userType', '=' , 'Band') // Find the userType
+ ->where(function ($query) {
+     $query->whereIn('word1', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
+           ->orWhereIn('word2', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
+           ->orWhereIn('word3', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
+           ->orWhereIn('word4', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
+           ->orWhereIn('word5', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5]);
+ }) 
+ ->paginate(6); // NEED TO DETERMINE HOW MANY USERS WILL BE RETURNED
 
 
 //Below are Test Querys to try and find the word attached to the user (Find Username)
@@ -509,6 +596,8 @@ $recommendationQuery=  User::where('id', '<>', Auth::user()->id)
 
        // Random User - Artist User
        $randomArtistUser = DB::table('users')
+
+       //Selects is within HTML template code with PHP indentation
           ->inRandomOrder()
           ->where('id', '!=', Auth::id()) // Can't be the  current Auth User Details
           ->where('userType','Artist')//**/We need a variable to set which genre of music they release **
@@ -516,7 +605,9 @@ $recommendationQuery=  User::where('id', '<>', Auth::user()->id)
           ->get();
 
        // Random User - Band User
+
        $randomBandUser = DB::table('users')
+       //Selects is within HTML template code with PHP indentation
        ->inRandomOrder()
        ->where('id', '!=', Auth::id()) // Can't be the  current Auth User Details
        ->where('userType','Band')//**/We need a variable to set which genre of music they release **
@@ -527,7 +618,8 @@ $recommendationQuery=  User::where('id', '<>', Auth::user()->id)
     
       //Return Variables
           return view ('pages.dashboard')
-          ->with('recommendationQuery',$recommendationQuery)
+          ->with('recommendationArtistWordsQuery',$recommendationArtistWordsQuery)
+          ->with('recommendationBandWordsQuery',$recommendationBandWordsQuery)
           ->with('randomArtistUser' , $randomArtistUser)
           ->with('randomBandUser' , $randomBandUser)
           ->with('genreMatch' , $genreMatch) 
