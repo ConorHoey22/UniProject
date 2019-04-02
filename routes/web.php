@@ -41,9 +41,16 @@ Route::post('profile', 'UserController@update_image');
 
 
 
+Route::get('/followFunction/{id}', [
+    'uses' => 'UserController@followFunction',
+    'as' => 'user.follow',
+    'middleware' => 'auth'
+]);
 
 
-Route::get('/profile/{id}', [
+
+
+Route::get('/profile/{username}', [
     'uses' => 'UserController@show',
     'as' => 'user.profile',
     'middleware' => 'auth'

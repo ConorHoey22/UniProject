@@ -3,6 +3,8 @@
 <!-- Profile-->
 
 @section('content')
+<link href="/css/design.css" rel="stylesheet" type="text/css">
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -27,6 +29,11 @@
                                     @endif
                                  
                                 </div>
+
+
+
+
+                                <a href="{{ route('user.follow', $user->id) }}" class="btn btn-xs btn-info pull-right">Follow</a>
 
                                 <!--Location of current Logged in user-->
                                 <div class = "displayLocation">

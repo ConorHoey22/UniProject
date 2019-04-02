@@ -7,6 +7,8 @@ namespace App\Http\Controllers;
 use App\Posts;
 use App\Recommendation;
 use App\User;
+use App\Follower;
+
 
 
 use Illuminate\Http\Request;
@@ -37,9 +39,11 @@ class UserController extends Controller
 
     $AuthSoundCloudProfile = Auth::user()->soundCloudProfile;
 
+    $AuthSpotifyProfile = Auth::user()->spotifyProfile;
 
 
-    return view('pages.myProfile')->with('posts', $posts )->with('AuthSoundCloudWidget', $AuthSoundCloudWidget)->with('AuthSoundCloudProfile', $AuthSoundCloudProfile)->with('user', $user);
+
+    return view('pages.myProfile')->with('posts', $posts )->with('AuthSoundCloudWidget', $AuthSoundCloudWidget)->with('AuthSoundCloudProfile', $AuthSoundCloudProfile)->with('user', $user) ->with('AuthSpotifyProfile', $AuthSpotifyProfile);
 
 
 
@@ -48,15 +52,17 @@ class UserController extends Controller
 
 
 
-    public function show($id)
+    public function show(Request $request, $username)
     {
     
 
         
 
         //Store and Find the user ID which then used to retrieve their profile - E.g. www._____.com/profile/1
-        $user = User::find($id);
+       // $user = User::find($username);
 
+
+       $user = User::where('username', $username)->first();
         if($user == null)
         {
             //User cannot be found - Return user to Error Message page explaining the problem
@@ -72,31 +78,7 @@ class UserController extends Controller
             //Return user to the requested user profile
 
             $posts = $user->posts()->get();
-
-            //SoundCloud details for Widgets
-
-
-
-
-
             
-           //  $getUserDetails = $user = user()->get();
-
-            // $soundCloudProfile = $getUserDetails->soundCloudProfile;
-             //$soundCloudWidget = $getUserDetails->soundCloudWidget;
-
-
-
-           //  $soundCloudWidget = $user = user()->soundCloudWidget->get();
-
-
-         //  $soundCloudProfileDetails = Posts::where('soundCloudProfile', $soundCloudProfile)->first();
-
-    
-         //  $soundCloudWidgetDetails = Posts::where('soundCloudProfile', $soundCloudProfile)->first();
-
-
-
 
 
 
@@ -105,6 +87,49 @@ class UserController extends Controller
 
        
     }
+
+
+    public function followFunction(Request $request, $id)
+    {
+     $user= User::find($id);
+    
+
+
+
+        // User Validation - You can't follow a user that you already follow.
+        if(Follower::where('follower_id','=', Auth::id())->where('user_id','=',$request['id'])->exists())
+        {
+            $message = "You are already following this user!";
+
+            return back()->with('message', $message);
+        }
+        //User Validation - The logged in User can't follow themselves (BUG NOT Working) 
+        elseif(Follower::where('follower_id','=', Auth::id())->where('user_id','=',Auth::id())->exists())
+        {
+            $message = "You can't follow yourself!";
+
+            return back()->with('message', $message);
+        } 
+        //Success Statement - Follow User
+        else
+        {
+            DB::table('follower')->insert(
+            ['follower_id' => Auth::id(), 'user_id' => $request['id']]
+            );
+        
+            $message = "Success - Following";
+
+            return back()->with('message' , $message);
+        }   
+
+
+    }
+
+
+
+
+
+
 
 
     public function update_image(Request $request){
@@ -207,25 +232,26 @@ class UserController extends Controller
             'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'ageRange' => 'required|string|max:255',
+            'ageRange' => 'nullable|string|max:255',
             'userAge' => 'required|string|max:255',
             'country' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'userType' => 'required|string|max:255',
-            'genre' => 'required|string|max:255',
-            'profileDescription' => 'required|string|max:255',
-            'soundCloudWidget' => 'required|string|max:255',
-            'soundCloudProfile' => 'required|string|max:255',
-            'word1' => 'required|string|max:255',
-            'word2' => 'required|string|max:255',
-            'word3' => 'required|string|max:255',
-            'word4' => 'required|string|max:255',
-            'word5' => 'required|string|max:255',
-            'similarity' => 'required|string|max:255',
-            'instruments' => 'required|string|max:255',
+            'genre' => 'nullable|string|max:255',
+            'profileDescription' => 'nullable|string|max:255',
+            'soundCloudWidget' => 'nullable|string|max:255',
+            'soundCloudProfile' => 'nullable|string|max:255',
+            'spotifyProfile' => 'nullable|string|max:255',
+            'word1' => 'nullable|string|max:255',
+            'word2' => 'nullable|string|max:255',
+            'word3' => 'nullable|string|max:255',
+            'word4' => 'nullable|string|max:255',
+            'word5' => 'nullable|string|max:255',
+            'similarity' => 'nullable|string|max:255',
+            'instruments' => 'nullable|string|max:255',
             'recommendationGenre' => 'required|string|max:255',
             'recommendationWord1' => 'required|string|max:255',
-            'recommendationWord2' => 'nullable|string|max:255',
+            'recommendationWord2' => 'required|string|max:255',
             'recommendationWord3' => 'required|string|max:255',
             'recommendationWord4' => 'required|string|max:255',
             'recommendationWord5' => 'required|string|max:255',
@@ -250,6 +276,7 @@ class UserController extends Controller
         $profileDescription= $request['profileDescription'];
         $soundCloudWidget = $request['soundCloudWidget'];
         $soundCloudProfile = $request['soundCloudProfile'];
+        $spotifyProfile = $request['spotifyProfile'];
         $word1 = $request['word1'];
         $word2 = $request['word2'];
         $word3 = $request['word3'];
@@ -287,6 +314,7 @@ class UserController extends Controller
         $user->profileDescription = $profileDescription;
         $user->soundCloudWidget = $soundCloudWidget;
         $user->soundCloudProfile = $soundCloudProfile;
+        $user->spotifyProfile = $spotifyProfile;
         $user->word1 = $word1;
         $user->word2 = $word2;
         $user->word3 = $word3;
@@ -306,14 +334,15 @@ class UserController extends Controller
         $user->recommendationInstruments = $recommendationInstruments;
         $user->recommendationSimilarity = $recommendationSimilarity;
         $user->recommendationUserType= $recommendationUserType;
+        
       
 
         $user->save();
         
         Auth::login($user);
         
-        //Redirect to Auth Profile Page
-        return redirect()->route('MyProfile');
+        //Redirect to Auth Dashboard
+        return redirect()->route('MyDashboard');
 
     }
 
@@ -323,7 +352,7 @@ class UserController extends Controller
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']]))
         {
             //redirect users to dashboard
-            return redirect()->route('dashboard');
+            return redirect()->route('MyDashboard');
         }
         else
         {

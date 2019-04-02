@@ -3,6 +3,8 @@
 <!-- Profile-->
 
 @section('content')
+<link href="/css/design.css" rel="stylesheet" type="text/css">
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -272,7 +274,7 @@
 
 
 
-
+<!--NEed to link to user input -->
         <iframe src="https://open.spotify.com/follow/1/?uri=spotify:user:conorhoey1&size=detail&theme=light" width="300" height="56" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe>
 
 

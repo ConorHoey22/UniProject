@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+<!--UserType Script-->
+<script src = "/js/userType.js"></script> 
+
+
 
 <div class="container">
     <div class="row justify-content-center">
@@ -10,7 +14,7 @@
                    <div class="card-body">
 
                      <!--Beginning of the Register Form - Values entered are sent to the RegisterController-->
-                    <form method="POST" action="{{ route('postsignup') }}">
+                    <form method="POST" action="{{ route('postsignup') }}" enctype="multipart/form-data">
                         @csrf
                         <!--Username-->
                         <div class="form-group row">
@@ -63,6 +67,15 @@
                             </div>
                         </div>
 
+                         <!--Location-->
+                         <div class="form-group row">
+                            <label for="location" class="col-md-4 col-form-label text-md-right">{{ __('Town/City:') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="location" type="text"  name="location" class= "form-control" required autofocus>
+                            </div>
+                        </div>   
+
                         <!--Country-->
                         <div class="form-group row">
                             <label for="country" class="col-md-4 col-form-label text-md-right">{{ __('Country:') }}</label>
@@ -72,37 +85,28 @@
                             </div>
                         </div>
 
-
-                          <!--Age-->
-                          <div class="form-group row">
-                            <label for="age" class="col-md-4 col-form-label text-md-right">{{ __('Age(Use age ranges for a band profile):') }}</label>
+                        <!--Age-->
+                        <div class="form-group row">
+                            <label for="age" class="col-md-4 col-form-label text-md-right">{{ __('Age ( Age of the main user ):') }}</label>
                                
                             <div class="col-md-6">
-                                <select name="ageRange" id="ageRange" class="form-control input" required autofocus>
-                                </select>
-                            <!--Temporary form -->
-                                <br>
-                                
+
                                 <p>Enter your age below (*This can be changed*)</p>
                                 <input id="userAge" type="text"  name="userAge" class= "form-control" required autofocus>
+                            
                             </div>
+                                
                         </div>
 
 
-                        <!--Location-->
-                        <div class="form-group row">
-                            <label for="location" class="col-md-4 col-form-label text-md-right">{{ __('Town/City:') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="location" type="text"  name="location" class= "form-control" required autofocus>
-                            </div>
-                        </div>   
 
-                        <!--UserTypes-->
-                        <div class="form-group row">
+  <!--UserTypes-->
+  <div class="form-group row">
                         <label for="userType" class="col-md-4 col-form-label text-md-right">{{ __('Type of user:') }}</label>
                             <div class="col-md-6">
-                                <select name = "userType" id="userType" class="form-control input">
+                                <select name = "userType" id="userType" class="form-control input" required autofocus>
+                                    <option></option>
                                     <option value="Listener">Listener</option>
                                     <option value="Artist">Artist</option>
                                     <option value="Band">Band</option>
@@ -110,132 +114,210 @@
                             </div>
                         </div>
 
-                    <!--Prefered Genre - Used for Artist/Band-->
-                     <div class="form-group row">
-                     <label for="genre" class="col-md-4 col-form-label text-md-right">{{ __('Please select a genre of music you usually peform:') }}</label>
+
+<div class = "BandOnly" id= "BandOnly" style="display : none;">
+    <div class="form-group row">
+                            <label for="age" class="col-md-4 col-form-label text-md-right">{{ __('Age Ranges of the band:') }}</label>
+                               
+                            <div class="col-md-6">
+                                <select name="ageRange" id="ageRange" class="form-control input">
+                                </select>
+                            </div>
+
+    </div>
+</div>
+
+
+                        
+<div class= "ArtistBandRegForm" id ="ArtistBandRegForm" style="display: none;">
+      
+
+
+
+
                    
-                        <div class="col-md-6">
-                              <select name = "genre" id="genre" class="form-control input" required autofocus>
-                                
-                              </select>
+
+                         <!--Prefered Genre -->
+                        <div class="form-group row">
+                            <label for="genre" class="col-md-4 col-form-label text-md-right">{{ __('Please select a genre of music you usually peform:') }}</label>
+                        
+                                <div class="col-md-6">
+                                    <select name = "genre" id="genre" class="form-control input" >
+                                        
+                                    </select>
+                                </div>
+                   
                         </div>
-                    </div>
 
 
-<!--Profile Image -->
-                    <div class="form-group row">
-                        <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Image (optional)') }}</label>
+                        
+                    
+                        <!--Profile Description-->
+                        <div class="form-group row">
+                            <label for="profileDescription" class="col-md-4 col-form-label text-md-right">{{ __('Profile Description:') }}</label>
 
-                        <div class="col-md-6">
-                             <input type="file" class="form-control" name="image" id="image">
-                        </div>
-                    </div>
-
-<!--Profile Description-->
-                    <label for="profileDescription" class="col-md-4 col-form-label text-md-right">{{ __('Profile Description:') }}</label>
                             <div class="col-md-6">
                                 <input id="profileDescription" type="text"  name="profileDescription" class= "form-control">
                             </div>
-                
+                        </div>  
 
-
-
-                     <!--SoundCloud Widget--   Not required --->
+                           <!--SoundCloud Widget--   Not required --->
                      <div class="form-group row">
 
-                            <label for="soundCloudWidget" class="col-md-4 col-form-label text-md-right">{{ __('Attach your SoundCloud Details:') }}</label>
-                            <div class="col-md-6">
-                                <input id="soundCloudWidget" type="text"  name="soundCloudWidget" class= "form-control">
-                            </div>
+<label for="soundCloudWidget" class="col-md-4 col-form-label text-md-right">{{ __('Attach your SoundCloud Details:') }}</label>
+<div class="col-md-6">
+    <input id="soundCloudWidget" type="text"  name="soundCloudWidget" class= "form-control">
+</div>
 
 
-                            <div class = howToGuide>
-                                <p> This is the creditionals you need to enter to obtain your soundCloudID</p>
-                            </div>
-                    
-                    </div>
+<div class = howToGuide>
+    <p> This is the creditionals you need to enter to obtain your soundCloudID</p>
+</div>
+
+</div>
 
 
 
-                     <!--SoundCloud Logo which link to your profile--   Not required -->
-                     <div class="form-group row">
+<!--SoundCloud Logo which link to your profile--   Not required -->
+<div class="form-group row">
 
-                            <label for="soundCloudProfile" class="col-md-4 col-form-label text-md-right">{{ __('Attach your SoundCloud Details:') }}</label>
-                            <div class="col-md-6">
-                                <input id="soundCloudProfile" type="text"  name="soundCloudProfile" class= "form-control">
-                            </div>
-                    </div>
+<label for="soundCloudProfile" class="col-md-4 col-form-label text-md-right">{{ __('Attach your SoundCloud Details:') }}</label>
+<div class="col-md-6">
+    <input id="soundCloudProfile" type="text"  name="soundCloudProfile" class= "form-control">
+</div>
+</div>
 
-                    
-                  <p>Choose 5 words that describe your style of music</p>
+<!--Spotify Logo which link to your profile--   Not required -->
+<div class="form-group row">
+
+<label for="spotifyProfile" class="col-md-4 col-form-label text-md-right">{{ __('Attach your Spotify Details:') }}</label>
+<div class="col-md-6">
+    <input id="spotifyProfile" type="text"  name="spotifyProfile" class= "form-control">
+</div>
+</div>
+
+
+
+<p>Choose 5 words that describe your style of music</p>
 <!--THIS WILL BE ONLY FOR ARTIST/BANDS-->
-                    <!--Word 1 -- Used to describe the artists/bands style of music-->
-                     <div class="form-group row">
+<!--Word 1 -- Used to describe the artists/bands style of music-->
+<div class="form-group row">
+
+<div class="col-md-6">
+    <select name = "word1" id="word1" class="form-control input" >
+    </select>
+</div>
+</div>
+
+
+<!--Word 2-- Used to describe the artists/bands style of music-->
+<div class="form-group row">
              
-                            <div class="col-md-6">
-                                <select name = "word1" id="word1" class="form-control input" required autofocus>
-                                </select>
-                            </div>
-                    </div>
-
-                    
-                    <!--Word 2-- Used to describe the artists/bands style of music-->
-                     <div class="form-group row">
-                                         
-                            <div class="col-md-6">
-                                <select name = "word2" id="word2" class="form-control input" required autofocus>
-                                </select>
-                            </div>
-                    </div>
-
-                     
-                    <!--Word 3-- Used to describe the artists/bands style of music-->
-                     <div class="form-group row">
-                                         
-                            <div class="col-md-6">
-                                <select name = "word3" id="word3" class="form-control input" required autofocus>
-                                </select>
-                            </div>
-                    </div>
-
-                     
-                    <!--Word 4-- Used to describe the artists/bands style of music-->
-                     <div class="form-group row">
-                                        
-                            <div class="col-md-6">
-                                <select name = "word4" id="word4" class="form-control input" required autofocus>
-                                </select>
-                            </div>
-                    </div>
-
-                     
-                    <!--Word 5-- Used to describe the artists/bands style of music-->
-                     <div class="form-group row">
-                                       
-                            <div class="col-md-6">
-                                <select name = "word5" id="word5" class="form-control input" required autofocus>
-                                </select>
-                            </div>
-                    </div>
+<div class="col-md-6">
+    <select name = "word2" id="word2" class="form-control input" >
+    </select>
+</div>
+</div>
 
 
-                       
-                    <!--Similarity Artist/Band--> <!--Artist/ BAnd only-->
-                    <div class="form-group row">
-                    <label for="similarity" class="col-md-4 col-form-label text-md-right">{{ __('Enter a similar band/artist with the same style of music:') }}</label>
-                                <div class="col-md-6">
-                                <input id="similarity" type="text"  name="similarity" class= "form-control input" required autofocus>
-                                </div>
-                    </div>
+<!--Word 3-- Used to describe the artists/bands style of music-->
+<div class="form-group row">
+             
+<div class="col-md-6">
+    <select name = "word3" id="word3" class="form-control input" >
+    </select>
+</div>
+</div>
 
-                     <!--Instruments used in your music (should be able to enter more than one) -->
-                     <div class="form-group row">
-                    <label for="instruments" class="col-md-4 col-form-label text-md-right">{{ __('Enter the main instruments used in your music:') }}</label>
-                                <div class="col-md-6">
-                                <input id="instruments" type="text"  name="instruments" class= "form-control input" required autofocus>
-                                </div>
-                    </div>
-                
+
+<!--Word 4-- Used to describe the artists/bands style of music-->
+<div class="form-group row">
+            
+<div class="col-md-6">
+    <select name = "word4" id="word4" class="form-control input" >
+    </select>
+</div>
+</div>
+
+
+<!--Word 5-- Used to describe the artists/bands style of music-->
+<div class="form-group row">
+           
+<div class="col-md-6">
+    <select name = "word5" id="word5" class="form-control input">
+    </select>
+</div>
+</div>
+
+
+
+<!--Similarity Artist/Band--> <!--Artist/ BAnd only-->
+<div class="form-group row">
+<label for="similarity" class="col-md-4 col-form-label text-md-right">{{ __('Enter a similar band/artist with the same style of music:') }}</label>
+    <div class="col-md-6">
+    <input id="similarity" type="text"  name="similarity" class= "form-control input" >
+    </div>
+</div>
+
+<!--Instruments used in your music (should be able to enter more than one) -->
+<div class="form-group row">
+<label for="instruments" class="col-md-4 col-form-label text-md-right">{{ __('Enter the main instruments used in your music:') }}</label>
+    <div class="col-md-6">
+    <input id="instruments" type="text"  name="instruments" class= "form-control input" >
+    </div>
+</div>     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<script src = "/css/dailyMusic.js"></script> 
+
+
 
                 <!--Recommendation User Details for the Recommendation System-->
 
@@ -259,7 +341,7 @@
                 <div class="col-md-6">
                     
                          <!-- Genre Dropdown Selection-->
-                        <select name="recommendationGenre" id="recommendationGenre" class="form-control input" required autofocus>
+                        <select name="recommendationGenre" id="recommendationGenre" class="form-control input" >
                         </select>
               
                 </div>
@@ -277,7 +359,7 @@
                 <div class="col-md-6">
                  
                          <!-- Word Selection --> 
-                        <select name="recommendationWord1" id="recommendationWord1" class="form-control input" required autofocus>
+                        <select name="recommendationWord1" id="recommendationWord1" class="form-control input">
                         </select>
                      
                 </div>
@@ -431,7 +513,7 @@
                         <select name="recommendationUserType" id="recommendationUserType" class="form-control input">
                             <option value="Artist">Artist</option>
                             <option value="Band">Band</option>
-                            <option value="Artist/Band">Artist or Band</option>
+                          
                         </select>
                      
                 </div>

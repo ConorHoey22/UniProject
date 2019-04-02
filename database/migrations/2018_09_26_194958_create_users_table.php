@@ -18,22 +18,23 @@ class CreateUsersTable extends Migration
             $table->string('username');
             $table->string('email');
             $table->string('password');
-            $table->string('ageRange'); // Only for Band
+            $table->string('ageRange')->nullable(); // Only for Band
             $table->string('userAge');
             $table->string('country');
             $table->string('location');
             $table->string('userType');
-            $table->string('genre'); // only for Artist/Band
-            $table->string('profileDescription');
-            $table->string('soundCloudWidget'); //  only for Artist/Band
-            $table->string('soundCloudProfile'); // only for Artist/Band
-            $table->string('word1'); // only for Artist/Band 
-            $table->string('word2'); // only for Artist/Band
-            $table->string('word3'); // only for Artist/Band
-            $table->string('word4'); // only for Artist/Band
-            $table->string('word5'); // only for Artist/Band
-            $table->string('similarity'); //    only for Artist/Band
-            $table->string('instruments'); //   only for Artist/Band
+            $table->string('genre')->nullable(); // only for Artist/Band
+            $table->string('profileDescription')->nullable();
+            $table->string('soundCloudWidget')->nullable(); //  only for Artist/Band
+            $table->string('soundCloudProfile')->nullable(); // only for Artist/Band
+            $table->string('spotifyProfile')->nullable(); // only for Artist/Band
+            $table->string('word1')->nullable(); // only for Artist/Band 
+            $table->string('word2')->nullable(); // only for Artist/Band
+            $table->string('word3')->nullable(); // only for Artist/Band
+            $table->string('word4')->nullable(); // only for Artist/Band
+            $table->string('word5')->nullable(); // only for Artist/Band
+            $table->string('similarity')->nullable(); //    only for Artist/Band
+            $table->string('instruments')->nullable(); //   only for Artist/Band
             
 //Recommendation Fields
             $table->string('recommendationGenre');
@@ -50,8 +51,6 @@ class CreateUsersTable extends Migration
             $table->string('recommendationUserType');
 
             $table->string('image')->default('default.jpg');
-
-
             // $table->string('dailyMusicMatch')->default('Default'); //CHange this , may create a bug
             $table->remembertoken(); /*BUG*/
             $table->timestamps();

@@ -3,7 +3,10 @@
 @section('content')
 
 <!--CSS FILE-->
+
 <link rel="stylesheet" href="/css/dailyMusic.css"/>
+
+<link rel="stylesheet" href="/css/design.css"/>
 
             <div class = "heading">
                <h1>Search for a random artist or band by genre!</h1>

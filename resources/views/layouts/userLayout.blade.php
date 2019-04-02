@@ -9,6 +9,9 @@
 
     <!-- Latest cdn CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+
+    <!--Icons-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     
 
 
@@ -32,7 +35,9 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
 
     <!--Nav bar-->
     <nav class="navbar navbar-inverse">
@@ -64,15 +69,31 @@
     </nav>
 </head>
 
+
 <body>
   
 @include('include.errorMessage')
 
 @yield('content')
 
+
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script src = "/js/posts.js"></script> 
+
+
+
+
+
 </body>
+
+<footer class="container-fluid text-center">
+  <p>DiscoverMusic</p>
+</footer>
+
+
+
+
 
 </html>
