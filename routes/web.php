@@ -49,6 +49,14 @@ Route::get('/followFunction/{id}', [
 
 
 
+Route::get('/unfollowFunction/{id}', [
+    'uses' => 'UserController@unfollowFunction',
+    'as' => 'user.unfollow',
+    'middleware' => 'auth'
+]);
+
+
+
 
 Route::get('/profile/{username}', [
     'uses' => 'UserController@show',

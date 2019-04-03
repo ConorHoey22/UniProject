@@ -31,9 +31,26 @@
                                 </div>
 
 
+                                
+                                <div class = "followBtn">
+                    
+                                        <!--Follow Button-->
+                                        <a href="{{ route('user.follow', $user->id) }}" class="btn btn-xs btn-info pull-right">Follow</a>
+                                  
+                                </div>
 
 
-                                <a href="{{ route('user.follow', $user->id) }}" class="btn btn-xs btn-info pull-right">Follow</a>
+
+                                <div class = "unFollowBtn">
+
+                                        <!--unFollow Button-->
+                                        <a href="{{ route('user.unfollow', $user->id) }}" class="btn btn-xs btn-info pull-right">unFollow</a>
+
+                                </div>>
+
+
+
+
 
                                 <!--Location of current Logged in user-->
                                 <div class = "displayLocation">
@@ -63,25 +80,27 @@
                                 @endif
                                 </div>
 
+                              
                                 <!--Spotify of current Logged in user-->
                                 <div class = "Spotify">
-                                
-
-                                        
+                                    <p>
+                                        <!-- WE NEED TO PUT THE IFRAME -->
+                                    </p>
                                 </div>
+
+
 
                                 <!--SoundCloud of current Logged in user-->
                                 <div class = "SoundCloud">
                                     <p>
-
+<!-- WE NEED TO PUT THE IFRAME -->
                                     </p>
                                 </div>
 
                                 <!--Social Media of current Logged in user-->
                                 <div class = "ProfileDescription">
 
-                             
-                                    <!--This value needs to inserted during registration-->
+    <!--This value needs to be attached-->
 
                                 </div>
 

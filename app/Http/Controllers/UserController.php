@@ -52,7 +52,7 @@ class UserController extends Controller
 
 
 
-    public function show(Request $request, $username)
+    public function show(Request $request, $username )
     {
     
 
@@ -75,14 +75,19 @@ class UserController extends Controller
         else
         {
 
-            //Return user to the requested user profile
 
+
+
+            //Return user to the requested user profile
             $posts = $user->posts()->get();
             
 
+         
 
 
-            return view('pages.profile')->with('user' , $user)->with('posts', $posts );
+
+
+            return view('pages.profile')->with('user' , $user)->with('posts', $posts);
         }
 
        
@@ -93,9 +98,6 @@ class UserController extends Controller
     {
      $user= User::find($id);
     
-
-
-
         // User Validation - You can't follow a user that you already follow.
         if(Follower::where('follower_id','=', Auth::id())->where('user_id','=',$request['id'])->exists())
         {
@@ -117,21 +119,38 @@ class UserController extends Controller
             ['follower_id' => Auth::id(), 'user_id' => $request['id']]
             );
         
-            $message = "Success - Following";
+            $message = "Successful - Following";
 
             return back()->with('message' , $message);
         }   
 
-
     }
 
 
+    //Unfollow
+    public function unfollowFunction(Request $request, $id)
+    {
 
+    $user= User::find($id);
 
+        if(Follower::where('follower_id','=', Auth::id())->where('user_id','=',$request['id'])->exists())
+        {
+            DB::table('follower')->where(
+                ['follower_id' => Auth::id(), 'user_id' => $request['id']]
+                )->delete();
+                
+                    $message = "Successful - Unfollowing";
+        }
+        else //Validation - you can't unfollow a user who you do not follow
+        {
+            $message = "You do not follow this user";
+        }
 
+            return back()->with('message' , $message);
+        
+    }
 
-
-
+    //upload image
     public function update_image(Request $request){
 
         $request->validate([
