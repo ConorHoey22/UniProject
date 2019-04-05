@@ -73,6 +73,7 @@
 
                                 <div class = "recommendedBandByWords">
                                 Band based on the recommendation words, you chose
+
                                     @foreach ($recommendationBandWordsQuery as $selectedUser)
             
 
@@ -95,19 +96,10 @@
                                             </table>
                                         
  
-                                    </div>
+                                         </div>
 
-
-
-
-
-
-
-
-
-
-                                   
                                     @endforeach   
+
                                 </div>
                                      
                            
@@ -116,56 +108,25 @@
 
                         </div>
 
-                        <div class = "recommendationGenre">
+                      
+                        </div>
 
-                        <p>Genre Recommendation</p>
+
+                        <div class = "genreMatch">
+
+                        <p>Genre Match</p>
 
                             @foreach ($genreMatch as $selectedUser)
 
-                    
-                                    <div class="table-responsive-md">
+                            <div class="table-responsive-md">
                                             <table class= "table">
                                             <tbody>
                                                 <tr>
-                                                <td> <p> {{ $selectedUser->username}}</p>  <!-- Username--></td>
-                                                <td><img class="img-rounded" src= "/storage/images/{{ $selectedUser->image }}" width=70 /></td> <!-- IF COndition - no image found-->
-                                                
-                                                <td><p> Genre: {{ $selectedUser->genre }} </p>  <!-- Genre--></td>
-                                                <td><p> Description: {{ $selectedUser->profileDescription }} </p>  <!-- Age(Band) --></td>
-                                                <td> 
-                                                <button type="button" class="btn btn-success">
-                                                <i class="fas fa-user-circle"></i> <br><a href="{{ route('user.profile', $selectedUser->username) }}">View Profile</a>
-                                                </button>
-                                                </td>
-                                                </tr>
-                                            </tbody>
-                                            </table>
-                                        
- 
-                                    </div>
-
-                            @endforeach   
-
-                         </div>
-
-
-                         <div class = "recommendationLocation">
-
-                         <p>Location Recommendation</p>
-
-                            @foreach ($locationMatch as $selectedUser)
-
-                     
-
-                                    <div class="table-responsive-md">
-                                            <table class= "table">
-                                            <tbody>
-                                                <tr>
-                                                <td> <p> {{ $selectedUser->username}}</p>  <!-- Username--></td>
+                                                <td> <p class="overflow-visible"> {{ $selectedUser->username}}</p>  <!-- Username--></td>
                                                 <td><img class="img-rounded" src= "/storage/images/{{ $selectedUser->image }}" width=70/></td> <!-- IF COndition - no image found-->
-                                          
-                                                <td><p> Genre: {{ $selectedUser->genre }} </p>  <!-- Genre--></td>
-                                                <td><p> Description: {{ $selectedUser->profileDescription }} </p>  <!-- Age(Band) --></td>
+                                               
+                                                <td><p class="overflow-visible"> Genre: {{ $selectedUser->genre }} </p>  <!-- Genre--></td>
+                                                <td><p class="overflow-visible"> Description: {{ $selectedUser->profileDescription }} </p>  <!-- Profile Description--></td>
                                                 <td> 
                                                 <button type="button" class="btn btn-success">
                                                 <i class="fas fa-user-circle"></i> <br><a href="{{ route('user.profile', $selectedUser->username) }}">View Profile</a>
@@ -177,11 +138,45 @@
                                         
  
                                     </div>
-
+                     
                             @endforeach   
 
                         </div>
 
+
+
+
+                        
+                        <div class = "followeingMatch">
+
+                        <p>Currently Following</p>
+
+                            @foreach ($following as $selectedUser)
+
+                            <div class="table-responsive-md">
+                                            <table class= "table">
+                                            <tbody>
+                                                <tr>
+                                                <td> <p class="overflow-visible"> {{ $selectedUser->username}}</p>  <!-- Username--></td>
+                                                <td><img class="img-rounded" src= "/storage/images/{{ $selectedUser->image }}" width=70/></td> <!-- IF COndition - no image found-->
+                                               
+                                                <td><p class="overflow-visible"> Genre: {{ $selectedUser->genre }} </p>  <!-- Genre--></td>
+                                                <td><p class="overflow-visible"> Description: {{ $selectedUser->profileDescription }} </p>  <!-- Profile Description--></td>
+                                                <td> 
+                                                <button type="button" class="btn btn-success">
+                                                <i class="fas fa-user-circle"></i> <br><a href="{{ route('user.profile', $selectedUser->username) }}">View Profile</a>
+                                                </button>
+                                                </td>
+                                                </tr>
+                                            </tbody>
+                                            </table>
+                                        
+ 
+                                    </div>
+                     
+                            @endforeach   
+
+                        </div>
                         
 
 
@@ -249,10 +244,33 @@
 
                         </div>
 
+                      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
                     </div>
+
+
+
+
+
 
                         <div class="Navigation-Search">
                             <button>Search</button>

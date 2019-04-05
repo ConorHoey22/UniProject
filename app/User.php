@@ -56,7 +56,7 @@ class User extends Authenticatable
 
     public function follower() // the user can have many followers
     {
-        return $this->belongsToMany('App\Follower', 'followers', 'follower_id', 'user_id');
+        return $this->belongsToMany('App\Follower');
     }
 
 

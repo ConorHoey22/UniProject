@@ -96,33 +96,43 @@ class UserController extends Controller
 
     public function followFunction(Request $request, $id)
     {
-     $user= User::find($id);
-    
-        // User Validation - You can't follow a user that you already follow.
-        if(Follower::where('follower_id','=', Auth::id())->where('user_id','=',$request['id'])->exists())
+    $user= User::find($id);
+
+    //Reason for follow by User id , If the users account is deleted that is not a problem as the account as the id is unique and there will never be another same id.
+    // however if a user clicks on account that no longer exists we need a validation , maybe ->exists() will work?
+
+
+
+        if(Follower::where('follower_id','=', Auth::id())->where('userid','=',$request['id'])->exists())
         {
             $message = "You are already following this user!";
 
             return back()->with('message', $message);
         }
-        //User Validation - The logged in User can't follow themselves (BUG NOT Working) 
-        elseif(Follower::where('follower_id','=', Auth::id())->where('user_id','=',Auth::id())->exists())
+
+        elseif(Follower::where('follower_id','=', Auth::id())->where('userid','=',Auth::id())->exists())
         {
             $message = "You can't follow yourself!";
 
             return back()->with('message', $message);
         } 
-        //Success Statement - Follow User
+ 
         else
         {
             DB::table('follower')->insert(
-            ['follower_id' => Auth::id(), 'user_id' => $request['id']]
+            ['follower_id' => Auth::id(), 'userid' => $request['id']]
             );
         
             $message = "Successful - Following";
 
             return back()->with('message' , $message);
+
         }   
+
+        
+
+     
+
 
     }
 
@@ -133,10 +143,10 @@ class UserController extends Controller
 
     $user= User::find($id);
 
-        if(Follower::where('follower_id','=', Auth::id())->where('user_id','=',$request['id'])->exists())
+        if(Follower::where('follower_id','=', Auth::id())->where('userid','=',$request['id'])->exists())
         {
             DB::table('follower')->where(
-                ['follower_id' => Auth::id(), 'user_id' => $request['id']]
+                ['follower_id' => Auth::id(), 'userid' => $request['id']]
                 )->delete();
                 
                     $message = "Successful - Unfollowing";
@@ -620,7 +630,6 @@ $recommendationBandWordsQuery=  User::where('id', '<>', Auth::user()->id)
 
       //Genre Match
        $genreMatch = DB::table('users')
-            ->select('username')
             ->where('id', '!=', Auth::id()) // Can't be the  current Auth User Details 
             ->where('genre', '=' , Auth::user()->recommendationGenre)  
             ->get();
@@ -636,7 +645,6 @@ $recommendationBandWordsQuery=  User::where('id', '<>', Auth::user()->id)
 
        //Location Match
        $locationMatch = DB::table('users')
-            ->select('username')
             ->where('id', '!=', Auth::id()) // Can't be the  current Auth User Details 
             ->where('location', '=' , Auth::user()->recommendationLocation)  
             ->get();
@@ -663,15 +671,32 @@ $recommendationBandWordsQuery=  User::where('id', '<>', Auth::user()->id)
        ->get();
 
 
-    
+      // List of all the users that the logged in user is following 
+
+$following = DB::table('users')
+ 
+   ->leftJoin('follower','follower.userid', '=', 'users.id')
+   ->where('follower.follower_id', '=', Auth::id())
+   ->get();
+
+
+
+
+
+     //   if ()
+//$table1 = $table2
+
+//and $Authid = id inn followers 
+
       //Return Variables
           return view ('pages.dashboard')
           ->with('recommendationArtistWordsQuery',$recommendationArtistWordsQuery)
           ->with('recommendationBandWordsQuery',$recommendationBandWordsQuery)
           ->with('randomArtistUser' , $randomArtistUser)
           ->with('randomBandUser' , $randomBandUser)
-          ->with('genreMatch' , $genreMatch) 
-          ->with('locationMatch', $locationMatch);
+          ->with('genreMatch' , $genreMatch)
+          ->with('locationMatch', $locationMatch)
+          ->with('following' , $following);
          
 
       //The most popular artist or band on the website - It could be the Auth User
@@ -680,95 +705,9 @@ $recommendationBandWordsQuery=  User::where('id', '<>', Auth::user()->id)
       //->where('followers', '=' , Auth::user()->recommendationLocation)  
       //->get();
 
-
-
-
-
-
-// or where word1 = Auth::()-> all of the recommendation , instead or OR OR OR inside that where clause
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //  $records_all = DB::table(DB::raw('table1, table2, table3'))
-    //  ->select('table1.*','table2.table2_id','table3.table3_id')
-    //  ->whereExists(function($query) use ($date) {
-     //     $query->from('table2')
-     //     ->whereRaw('table2.table1_id = table1.table1_id')
-     //     ->whereNotExists(function($query) use ($date) {
-       //       $query->from('table3')
-      //        ->whereRaw('table2.table2_id = table3.table2_id')
-      //        ->whereRaw("DATE(table3.date)='" . $date . "'");
-      //    });
-    //  })
-    //  ->orderBy('url')
-   //   ->get();
-
-
-
-
-
-
-        //other specs
-    //    ->whereNotExists(function($query)  {
-          //  $query->from('')
-         //   ->whereRaw('table2.table2_id = table3.table2_id')
-        //    ->whereRaw("DATE(table3.date)='" . $date . "'");
-       // });
-  //  })
-  //  ->orderBy('url')
-    //->get();
-   
-       // userType = Match , genre = Match  display user
-   
-   
-       //userType = Match  - Give a random user based on userType
-   
-        
-   
-        //location = Match
-   
-        // ageRange = MAtch 
-   
-        // instruments =  match 
-       
-         // genre = match 
-   
-         //similarity = match 
-   
-         //words = match  -- 2 words or more = match??
-   
-           //return view('pages.dashboard')->with('records_all',$records_all);
-   
       }
    
-       //function - IF .. like .. then they may like ... 
+
    }
    
 

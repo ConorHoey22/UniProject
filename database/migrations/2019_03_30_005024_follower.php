@@ -16,8 +16,8 @@ class Follower extends Migration
 
         Schema::create('follower', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('follower_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->string('follower_id');
+            $table->string('userid');
       
      
 
