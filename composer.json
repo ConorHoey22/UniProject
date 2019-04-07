@@ -9,6 +9,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
+        "mettleworks/big-huge-thesaurus-client": "^1.0",
         "rennokki/larafy": "^1.0"
     },
     "require-dev": {

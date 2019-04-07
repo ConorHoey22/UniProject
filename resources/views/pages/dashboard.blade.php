@@ -25,20 +25,6 @@
                                             <caption>Recommendated Artist based on your requested words</caption>
                                            
                                         
-                                           
-
-
-
-
-
-
-
-
-
-
-
-
-
                                     @foreach ($recommendationArtistWordsQuery as $selectedUser)
 
                             
@@ -65,7 +51,7 @@
                      
                                            
                                     @endforeach   
-</div>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -147,7 +133,7 @@
 
 
                         
-                        <div class = "followeingMatch">
+                        <div class = "following">
 
                         <p>Currently Following</p>
 

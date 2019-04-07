@@ -4,6 +4,12 @@
 <!--UserType Script-->
 <script src = "/js/userType.js"></script> 
 
+<!--Recommendation Script : make dropdown disappear when user wants to input a value -->
+<script src = "/js/recommendationWord.js"></script> 
+
+
+<!--Recommendation Script : make dropdown disappear when user wants to input a value *For Artist/Bands Only* -->
+<script src = "/js/inputWord.js"></script> 
 
 
 <div class="container">
@@ -203,51 +209,92 @@
 <!--Word 1 -- Used to describe the artists/bands style of music-->
 <div class="form-group row">
 
-<div class="col-md-6">
-    <select name = "word1" id="word1" class="form-control input" >
-    </select>
+    <div class="col-md-6">
+        <select name = "word1" id="word1" class="form-control input"  onChange='UserInput()'> 
+        </select>
+    </div>
 </div>
-</div>
+
+
+    <!--Enter a word option - only if the user selects enter a word in the selection box-->
+    <div class="form-group row">
+        <div class="col-md-6" >
+            <input id="word1input" type="text"  name="word1" class= "form-control input" style = "display: none;"  onChange='UserInput()'>
+       </div>
+   </div>   
+
+
 
 
 <!--Word 2-- Used to describe the artists/bands style of music-->
 <div class="form-group row">
              
-<div class="col-md-6">
-    <select name = "word2" id="word2" class="form-control input" >
-    </select>
+    <div class="col-md-6">
+        <select name = "word2" id="word2" class="form-control input"  onChange='UserInput()'>
+        </select>
+    </div>
 </div>
-</div>
+
+    <!--Enter a word option - only if the user selects enter a word in the selection box-->
+    <div class="form-group row">
+            <div class="col-md-6" >
+                <input id="word2input" type="text"  name="word2" class= "form-control input" style = "display: none;"  onChange='UserInput()'>
+        </div>
+    </div>   
+
 
 
 <!--Word 3-- Used to describe the artists/bands style of music-->
 <div class="form-group row">
              
-<div class="col-md-6">
-    <select name = "word3" id="word3" class="form-control input" >
-    </select>
+    <div class="col-md-6">
+        <select name = "word3" id="word3" class="form-control input"  onChange='UserInput()'>
+        </select>
+    </div>
 </div>
-</div>
+
+    <!--Enter a word option - only if the user selects enter a word in the selection box-->
+    <div class="form-group row">
+            <div class="col-md-6" >
+                <input id="word3input" type="text"  name="word3" class= "form-control input" style = "display: none;"  onChange='UserInput()'>
+        </div>
+    </div>   
 
 
 <!--Word 4-- Used to describe the artists/bands style of music-->
 <div class="form-group row">
             
-<div class="col-md-6">
-    <select name = "word4" id="word4" class="form-control input" >
-    </select>
+    <div class="col-md-6">
+        <select name = "word4" id="word4" class="form-control input" onChange='UserInput()'>
+        </select>
+    </div>
 </div>
-</div>
+
+    <!--Enter a word option - only if the user selects enter a word in the selection box-->
+    <div class="form-group row">
+            <div class="col-md-6" >
+                <input id="word4input" type="text"  name="word4" class= "form-control input" style = "display: none;"  onChange='UserInput()'> 
+        </div>
+    </div>   
 
 
 <!--Word 5-- Used to describe the artists/bands style of music-->
 <div class="form-group row">
-           
-<div class="col-md-6">
-    <select name = "word5" id="word5" class="form-control input">
-    </select>
+            
+    <div class="col-md-6">
+        <select name = "word5" id="word5" class="form-control input" onChange='UserInput()'>
+        </select>
+    </div>
 </div>
-</div>
+
+    <!--Enter a word option - only if the user selects enter a word in the selection box-->
+    <div class="form-group row">
+            <div class="col-md-6" >
+                <input id="word5input" type="text"  name="word5" class= "form-control input" style = "display: none;"  onChange='UserInput()'>
+        </div>
+    </div>   
+
+
 
 
 
@@ -255,7 +302,7 @@
 <div class="form-group row">
 <label for="similarity" class="col-md-4 col-form-label text-md-right">{{ __('Enter a similar band/artist with the same style of music:') }}</label>
     <div class="col-md-6">
-    <input id="similarity" type="text"  name="similarity" class= "form-control input" >
+    <input id="similarity" type="text"  name="similarity" class= "form-control input" placeholder = "Enter a similar artist or band">
     </div>
 </div>
 
@@ -263,7 +310,7 @@
 <div class="form-group row">
 <label for="instruments" class="col-md-4 col-form-label text-md-right">{{ __('Enter the main instruments used in your music:') }}</label>
     <div class="col-md-6">
-    <input id="instruments" type="text"  name="instruments" class= "form-control input" >
+    <input id="instruments" type="text"  name="instruments" class= "form-control input" placeholder = "Enter the main instrument">
     </div>
 </div>     
 
@@ -337,87 +384,138 @@
 <div class = "GenreList">
             <div class="form-group row">
                  <br>
-             <label for="Select some genres" class="col-md-4 col-form-label text-md-right">{{ __('Select some genres') }}</label>
+             <label for="Select some genres" class="col-md-4 col-form-label text-md-right">{{ __('Select your preferred genre') }}</label>
                 <div class="col-md-6">
                     
                          <!-- Genre Dropdown Selection-->
-                        <select name="recommendationGenre" id="recommendationGenre" class="form-control input" >
+                        <select name="recommendationGenre" id="recommendationGenre" class="form-control input" placeholder = "Enter a genre">
                         </select>
               
                 </div>
             </div>    
 </div>
+
 <div class = "Words Title">
     <p>Select some words that describe the music you like to listen to </p>
 </div
+
 >
 <!-- Words to find a match   / Selection of a few words  --- FIX THIS !!  -->
 <div class = "WordsList" >
+
             <div class="form-group row">
-                 <br>
-             <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select some words') }}</label>
+                <br>
+                <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select a word') }}</label>
                 <div class="col-md-6">
-                 
-                         <!-- Word Selection --> 
-                        <select name="recommendationWord1" id="recommendationWord1" class="form-control input">
+                    <!-- Word Selection --> 
+                        <select name="recommendationWord1" id="recommendationWord1" class="form-control input" onChange='UserInput1()'>
                         </select>
-                     
                 </div>
-            </div>    
+            </div>
+
+            <!--Enter a word option - only if the user selects enter a word in the selection box-->
+           <div class="form-group row">
+                  <div class="col-md-6" >
+                     <input id="recommendationWord1input" type="text"  name="recommendationWord1" class= "form-control input" style = "display: none;" placeholder = "Enter a word">
+                 </div>
+           </div>   
+
+
 
             <!--Word2-->
             <div class="form-group row">
                  <br>
-             <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select some words') }}</label>
-                <div class="col-md-6">
-                 
+                 <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select a word') }}</label>
+                 <div class="col-md-6">
                          <!-- Word Selection -->
-                        <select name="recommendationWord2" id="recommendationWord2" class="form-control input">
-                        </select>
-                     
+                        <select name="recommendationWord2" id="recommendationWord2" class="form-control input" onChange='UserInput1()'>
+                        </select>            
                 </div>
             </div>  
+
+            <!--Enter a word option - only if the user selects enter a word in the selection box-->
+            <div class="form-group row">
+                  <div class="col-md-6" >
+                     <input id="recommendationWord2input" type="text"  name="recommendationWord2" class= "form-control input" style = "display: none;" placeholder = "Enter a word">
+                 </div>
+            </div>   
+
+
+
 
             <!--Word3-->
            <div class="form-group row">
                  <br>
-             <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select some words') }}</label>
+             <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select a word') }}</label>
                 <div class="col-md-6"> 
                 
                          <!-- Word Selection -->
-                         <select name="recommendationWord3" id="recommendationWord3" class="form-control input">
+                         <select name="recommendationWord3" id="recommendationWord3" class="form-control input" onChange = "UserInput1()">
                         </select>
                      
                 </div>
             </div>     
 
+             <!--Enter a word option - only if the user selects enter a word in the selection box-->
+             <div class="form-group row">
+                  <div class="col-md-6" >
+                     <input id="recommendationWord3input" type="text"  name="recommendationWord3" class= "form-control input" style = "display: none;" placeholder = "Enter a word">
+                 </div>
+            </div>   
+
+
+
+
             <!--Word4-->
             <div class="form-group row">
                  <br>
-             <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select some words') }}</label>
+             <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select a word') }}</label>
                 <div class="col-md-6">
                  
                          <!-- Genre Dropdown Selection--> 
-                        <select name="recommendationWord4" id="recommendationWord4" class="form-control input">
+                        <select name="recommendationWord4" id="recommendationWord4" class="form-control input" onChange= "UserInput1()">
                         </select>
                      
                 </div>
             </div>  
 
+            <!--Enter a word option - only if the user selects enter a word in the selection box-->
+            <div class="form-group row">
+                  <div class="col-md-6" >
+                     <input id="recommendationWord4input" type="text"  name="recommendationWord4" class= "form-control input" style = "display: none;" placeholder = "Enter a word">
+                 </div>
+            </div>   
+
+
+
+
+
+
+
+
             <!--Word5-->
             <div class="form-group row">
                  <br>
-             <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select some words') }}</label>
+             <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select a word') }}</label>
                 <div class="col-md-6">
                  
                          <!-- Genre Dropdown Selection--> 
-                        <select name="recommendationWord5" id="recommendationWord5" class="form-control input">
+                        <select name="recommendationWord5" id="recommendationWord5" class="form-control input" onChange = "UserInput1()">
                         </select>
                      
                 </div>
             </div>
 
 
+
+             <!--Enter a word option - only if the user selects enter a word in the selection box-->
+             <div class="form-group row">
+                  <div class="col-md-6" >
+                     <input id="recommendationWord5input" type="text"  name="recommendationWord5" class= "form-control input" style = "display: none;" placeholder = "Enter a word">
+                 </div>
+            </div>   
+
+</div>
 
 
 
