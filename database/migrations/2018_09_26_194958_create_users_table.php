@@ -35,6 +35,7 @@ class CreateUsersTable extends Migration
             $table->string('word5')->nullable(); // only for Artist/Band
             $table->string('similarity')->nullable(); //    only for Artist/Band
             $table->string('instruments')->nullable(); //   only for Artist/Band
+            $table->string('image')->default('default.jpg');
             
 //Recommendation Fields
             $table->string('recommendationGenre');
@@ -45,14 +46,16 @@ class CreateUsersTable extends Migration
             $table->string('recommendationWord5'); // How do we store more than one
 
             $table->string('recommendationAge'); 
+            $table->string('recommendationAgeRange'); 
+            $table->string('recommendationCountry'); 
             $table->string('recommendationLocation');
             $table->string('recommendationInstruments');
             $table->string('recommendationSimilarity');
             $table->string('recommendationUserType');
 
-            $table->string('image')->default('default.jpg');
-            // $table->string('dailyMusicMatch')->default('Default'); //CHange this , may create a bug
-            $table->remembertoken(); /*BUG*/
+
+            // $table->string('dailyMusicMatch')->default('Default'); //CHange this , may create a bug 
+            $table->remembertoken(); /*BUG*/     
             $table->timestamps();
         });
     }

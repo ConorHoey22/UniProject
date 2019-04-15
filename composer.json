@@ -9,7 +9,6 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
-        "mettleworks/big-huge-thesaurus-client": "^1.0",
         "rennokki/larafy": "^1.0"
     },
     "require-dev": {
@@ -19,6 +18,7 @@
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^2.0",
         "phpunit/phpunit": "^7.0"
+
     },
     "autoload": {
         "classmap": [

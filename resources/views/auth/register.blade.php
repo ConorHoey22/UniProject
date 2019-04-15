@@ -4,12 +4,18 @@
 <!--UserType Script-->
 <script src = "/js/userType.js"></script> 
 
-<!--Recommendation Script : make dropdown disappear when user wants to input a value -->
-<script src = "/js/recommendationWord.js"></script> 
 
 
-<!--Recommendation Script : make dropdown disappear when user wants to input a value *For Artist/Bands Only* -->
-<script src = "/js/inputWord.js"></script> 
+ 
+
+
+
+
+
+
+<!--Words that describes the Artist/Band JavaScript -- This will allow the user to enter a word and disappear when not needed. -->
+
+
 
 
 <div class="container">
@@ -20,7 +26,7 @@
                    <div class="card-body">
 
                      <!--Beginning of the Register Form - Values entered are sent to the RegisterController-->
-                    <form method="POST" action="{{ route('postsignup') }}" enctype="multipart/form-data">
+                    <form method="POST" name= "registerForm" action="{{ route('postsignup') }}" enctype="multipart/form-data">
                         @csrf
                         <!--Username-->
                         <div class="form-group row">
@@ -134,6 +140,11 @@
 </div>
 
 
+
+
+
+
+
                         
 <div class= "ArtistBandRegForm" id ="ArtistBandRegForm" style="display: none;">
       
@@ -203,25 +214,71 @@
 </div>
 
 
+       <!-- FILL AGE RANGES DROPDOWN WITH JSON FILE--->
+       <script src = "/js/populateAgeRanges.js"></script>   
+
+<!-- FILL DROPDOWN WITH GENRE JSON FILE--->
+<script src = "/js/populateGenres.js"></script>   
+
+  <!-- FILL DROPDOWN WITH Words JSON FILE--->
+  <script src = "/js/populateWords.js"></script>   
+
+
+
+
+
+
+
+
 
 <p>Choose 5 words that describe your style of music</p>
 <!--THIS WILL BE ONLY FOR ARTIST/BANDS-->
 <!--Word 1 -- Used to describe the artists/bands style of music-->
-<div class="form-group row">
 
+<script type="text/javascript">
+
+    function Check1(val)
+    {
+        var element=document.getElementById('word1input');
+        if(val=='Enter a word')
+        {
+            element.style.display='block';
+        }
+        else  
+        {
+            element.style.display='none'; 
+        }   
+    }
+
+</script> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="form-group row">
     <div class="col-md-6">
-        <select name = "word1" id="word1" class="form-control input"  onChange='UserInput()'> 
-        </select>
+        <select name = "word1" id="word1" class="form-control input" onchange='Check1(this.value);'></select>
     </div>
 </div>
 
-
-    <!--Enter a word option - only if the user selects enter a word in the selection box-->
+    <!--Enter a word option - only if the user selects enter a word in the selection box -->
     <div class="form-group row">
-        <div class="col-md-6" >
-            <input id="word1input" type="text"  name="word1" class= "form-control input" style = "display: none;"  onChange='UserInput()'>
+        <div class="col-md-6">
+            <input id="word1input" type="text"  name="word1" class= "form-control input" style = "display: none;">
        </div>
-   </div>   
+   </div>  
 
 
 
@@ -230,70 +287,68 @@
 <div class="form-group row">
              
     <div class="col-md-6">
-        <select name = "word2" id="word2" class="form-control input"  onChange='UserInput()'>
-        </select>
+        <select name = "word2" id="word2" class="form-control input"></select>
     </div>
+
+    
 </div>
 
     <!--Enter a word option - only if the user selects enter a word in the selection box-->
     <div class="form-group row">
             <div class="col-md-6" >
-                <input id="word2input" type="text"  name="word2" class= "form-control input" style = "display: none;"  onChange='UserInput()'>
-        </div>
+                <input id="word2input" type="text"  name="word2" class= "form-control input" style = "display: none;">
+            </div>
     </div>   
 
 
 
-<!--Word 3-- Used to describe the artists/bands style of music-->
+<!--Word 3-- Used to describe the artists/bands style of music -->
 <div class="form-group row">
              
     <div class="col-md-6">
-        <select name = "word3" id="word3" class="form-control input"  onChange='UserInput()'>
-        </select>
-    </div>
+        <select name = "word3" id="word3" class="form-control input"></select>
+    </div> 
+
 </div>
 
-    <!--Enter a word option - only if the user selects enter a word in the selection box-->
+    <!--Enter a word option - only if the user selects enter a word in the selection box
     <div class="form-group row">
             <div class="col-md-6" >
-                <input id="word3input" type="text"  name="word3" class= "form-control input" style = "display: none;"  onChange='UserInput()'>
+                <input id="word3input" type="text"  name="word3" class= "form-control input" style = "display: none;">
         </div>
-    </div>   
+    </div>  -->
 
 
 <!--Word 4-- Used to describe the artists/bands style of music-->
 <div class="form-group row">
             
     <div class="col-md-6">
-        <select name = "word4" id="word4" class="form-control input" onChange='UserInput()'>
-        </select>
+        <select name = "word4" id="word4" class="form-control input"></select>
     </div>
 </div>
 
-    <!--Enter a word option - only if the user selects enter a word in the selection box-->
+    <!--Enter a word option - only if the user selects enter a word in the selection box
     <div class="form-group row">
             <div class="col-md-6" >
-                <input id="word4input" type="text"  name="word4" class= "form-control input" style = "display: none;"  onChange='UserInput()'> 
-        </div>
-    </div>   
+                <input id="word4input" type="text"  name="word4" class= "form-control input" style = "display: none;"> 
+           </div>
+    </div>   -->
 
 
 <!--Word 5-- Used to describe the artists/bands style of music-->
 <div class="form-group row">
             
     <div class="col-md-6">
-        <select name = "word5" id="word5" class="form-control input" onChange='UserInput()'>
-        </select>
+        <select name = "word5" id="word5" class="form-control input"></select>
     </div>
 </div>
 
-    <!--Enter a word option - only if the user selects enter a word in the selection box-->
+    <!--Enter a word option - only if the user selects enter a word in the selection box
     <div class="form-group row">
             <div class="col-md-6" >
-                <input id="word5input" type="text"  name="word5" class= "form-control input" style = "display: none;"  onChange='UserInput()'>
+                <input id="word5input" type="text"  name="word5" class= "form-control input" style = "display: none;">
         </div>
-    </div>   
-
+    </div>   -->
 
 
 
@@ -364,6 +419,16 @@
 
 <script src = "/css/dailyMusic.js"></script> 
 
+       <!-- FILL AGE RANGES DROPDOWN WITH JSON FILE--->
+       <script src = "/js/populateAgeRanges.js"></script>   
+
+<!-- FILL DROPDOWN WITH GENRE JSON FILE--->
+<script src = "/js/populateGenres.js"></script>   
+
+  <!-- FILL DROPDOWN WITH Words JSON FILE--->
+  <script src = "/js/populateWords.js"></script>   
+
+
 
 
                 <!--Recommendation User Details for the Recommendation System-->
@@ -403,22 +468,42 @@
 <!-- Words to find a match   / Selection of a few words  --- FIX THIS !!  -->
 <div class = "WordsList" >
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div class="form-group row">
                 <br>
                 <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select a word') }}</label>
                 <div class="col-md-6">
                     <!-- Word Selection --> 
-                        <select name="recommendationWord1" id="recommendationWord1" class="form-control input" onChange='UserInput1()'>
+                        <select name="recommendationWord1" id="recommendationWord1" class="form-control input">
                         </select>
                 </div>
             </div>
 
-            <!--Enter a word option - only if the user selects enter a word in the selection box-->
+            <!--Enter a word option - only if the user selects enter a word in the selection box 
            <div class="form-group row">
-                  <div class="col-md-6" >
-                     <input id="recommendationWord1input" type="text"  name="recommendationWord1" class= "form-control input" style = "display: none;" placeholder = "Enter a word">
+                  <div class="col-md-6">
+                     <input id="recommendationWord1input" type="text"  name="recommendationWord1" class= "form-control input" style = "display: none;" placeholder = "Enter a word"/>
                  </div>
-           </div>   
+           </div>   -->
 
 
 
@@ -428,17 +513,17 @@
                  <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select a word') }}</label>
                  <div class="col-md-6">
                          <!-- Word Selection -->
-                        <select name="recommendationWord2" id="recommendationWord2" class="form-control input" onChange='UserInput1()'>
+                        <select name="recommendationWord2" id="recommendationWord2" class="form-control input">
                         </select>            
                 </div>
             </div>  
 
-            <!--Enter a word option - only if the user selects enter a word in the selection box-->
+            <!--Enter a word option - only if the user selects enter a word in the selection box 
             <div class="form-group row">
                   <div class="col-md-6" >
-                     <input id="recommendationWord2input" type="text"  name="recommendationWord2" class= "form-control input" style = "display: none;" placeholder = "Enter a word">
+                     <input id="recommendationWord2input" type="text"  name="recommendationWord2" class= "form-control input" style = "display: none;" placeholder = "Enter a word"/>
                  </div>
-            </div>   
+            </div>   -->
 
 
 
@@ -450,18 +535,18 @@
                 <div class="col-md-6"> 
                 
                          <!-- Word Selection -->
-                         <select name="recommendationWord3" id="recommendationWord3" class="form-control input" onChange = "UserInput1()">
+                         <select name="recommendationWord3" id="recommendationWord3" class="form-control input">
                         </select>
                      
                 </div>
             </div>     
 
-             <!--Enter a word option - only if the user selects enter a word in the selection box-->
+             <!--Enter a word option - only if the user selects enter a word in the selection box 
              <div class="form-group row">
                   <div class="col-md-6" >
                      <input id="recommendationWord3input" type="text"  name="recommendationWord3" class= "form-control input" style = "display: none;" placeholder = "Enter a word">
                  </div>
-            </div>   
+            </div>   -->
 
 
 
@@ -472,55 +557,60 @@
              <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select a word') }}</label>
                 <div class="col-md-6">
                  
-                         <!-- Genre Dropdown Selection--> 
-                        <select name="recommendationWord4" id="recommendationWord4" class="form-control input" onChange= "UserInput1()">
+         
+                        <select name="recommendationWord4" id="recommendationWord4" class="form-control input">
                         </select>
                      
                 </div>
             </div>  
 
-            <!--Enter a word option - only if the user selects enter a word in the selection box-->
+            <!--Enter a word option - only if the user selects enter a word in the selection box
             <div class="form-group row">
                   <div class="col-md-6" >
-                     <input id="recommendationWord4input" type="text"  name="recommendationWord4" class= "form-control input" style = "display: none;" placeholder = "Enter a word">
+                     <input id="recommendationWord4input" type="text"  name="recommendationWord4" class= "form-control input" style = "display: none;" placeholder = "Enter a word" />
                  </div>
-            </div>   
-
-
-
-
-
-
-
+            </div>  -->
 
             <!--Word5-->
             <div class="form-group row">
                  <br>
              <label for="Select some words" class="col-md-4 col-form-label text-md-right">{{ __('Select a word') }}</label>
                 <div class="col-md-6">
-                 
-                         <!-- Genre Dropdown Selection--> 
-                        <select name="recommendationWord5" id="recommendationWord5" class="form-control input" onChange = "UserInput1()">
+                
+                        <select name="recommendationWord5" id="recommendationWord5" class="form-control input">
                         </select>
                      
                 </div>
-            </div>
+            </div> 
 
 
 
-             <!--Enter a word option - only if the user selects enter a word in the selection box-->
+             <!--Enter a word option - only if the user selects enter a word in the selection box 
              <div class="form-group row">
-                  <div class="col-md-6" >
-                     <input id="recommendationWord5input" type="text"  name="recommendationWord5" class= "form-control input" style = "display: none;" placeholder = "Enter a word">
-                 </div>
-            </div>   
+                  <div class="col-md-6">
+                     <input id="recommendationWord5input" type="text"  name="recommendationWord5" class= "form-control input" style = "display: none;" placeholder = "Enter a word" />
+                 </div> -->
 
 </div>
 
 
 
 </div>
+<!-- Location of the Artist/Band -->
+<div class = "ageInput">
+<div class="form-group row">
+                 <br>
+             <label for="age" class="col-md-4 col-form-label text-md-right">{{ __('Enter a age') }}</label>
+                <div class="col-md-6">
+                    
+                         <!-- Location input box-->
+                         <input id="recommendationAge" type="text"  name="recommendationAge" class= "form-control">
 
+                    
+                </div>
+            </div>    
+</div>
+</div>
 
 
 <!-- Age range of Artist/Band -->
@@ -531,7 +621,7 @@
                 <div class="col-md-6">
                     
                          <!-- Age Range Dropdown Selection-->
-                        <select name="recommendationAge" id="recommendationAge" class="form-control input">
+                        <select name="recommendationAgeRange" id="recommendationAgeRange" class="form-control input">
                         </select>
                      
                 </div>
@@ -548,6 +638,22 @@
                     
                          <!-- Location input box-->
                          <input id="recommendationLocation" type="text"  name="recommendationLocation" class= "form-control">
+
+                    
+                </div>
+            </div>    
+</div>
+</div>
+
+<!-- Location of the Artist/Band -->
+<div class = "countryInput">
+<div class="form-group row">
+                 <br>
+             <label for="country" class="col-md-4 col-form-label text-md-right">{{ __('Enter a country') }}</label>
+                <div class="col-md-6">
+                    
+                         <!-- Location input box-->
+                         <input id="recommendationCountry" type="text"  name="recommendationCountry" class= "form-control">
 
                     
                 </div>
@@ -643,21 +749,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-        <!-- FILL AGE RANGES DROPDOWN WITH JSON FILE--->
-        <script src = "/js/populateAgeRanges.js"></script>   
-
-         <!-- FILL DROPDOWN WITH GENRE JSON FILE--->
-         <script src = "/js/populateGenres.js"></script>   
-
-           <!-- FILL DROPDOWN WITH Words JSON FILE--->
-           <script src = "/js/populateWords.js"></script>   
-
-
-
 
 
 

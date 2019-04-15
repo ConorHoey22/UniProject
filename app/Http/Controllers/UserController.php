@@ -8,16 +8,23 @@ use App\Posts;
 use App\Recommendation;
 use App\User;
 use App\Follower;
-
+use DB;
+use Auth;
+use Cache;
+use Session;
+use View;
 
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Input;
 
-use Auth;
 
-use DB;
+
+
+
+
 
 
 class UserController extends Controller
@@ -69,7 +76,7 @@ class UserController extends Controller
 
             $message = "The user profile that you previously tried to retrieve does not exist!";
 
-            return redirect()->route('dashboard')->with('message', $message);
+            return redirect()->route('MyDashboard')->with('message', $message);
            
         }
         else
@@ -164,6 +171,7 @@ class UserController extends Controller
     public function update_image(Request $request){
 
         $request->validate([
+                       //VALIDATION FOR invalid formats
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -179,38 +187,9 @@ class UserController extends Controller
         return back()
             ->with('success','You have updated image.');
 
-
-            //NEED VALIDATION FOR invalid formats
-
-    }
-
-
-
-        
-    public function updatePost(Request $request, Posts $post)
-    {
-
-        $postUpdate = Post::where('id' , $post->id)->update(['postTitle' => $request->input('postTitle'), 'postContent' => $request->input('postContent')]);
-
-
-        if($postUpdate)
-        {
-            return redirect()->route('MyProfile', ['post'=>$post->id])->with('success');
         }
 
 
-
-
-
-
-            return back()->withInput();
-
-
-
-
-     
-        
-    }
 
 
 
@@ -278,6 +257,7 @@ class UserController extends Controller
             'word5' => 'nullable|string|max:255',
             'similarity' => 'nullable|string|max:255',
             'instruments' => 'nullable|string|max:255',
+    
             'recommendationGenre' => 'required|string|max:255',
             'recommendationWord1' => 'required|string|max:255',
             'recommendationWord2' => 'required|string|max:255',
@@ -285,10 +265,12 @@ class UserController extends Controller
             'recommendationWord4' => 'required|string|max:255',
             'recommendationWord5' => 'required|string|max:255',
             'recommendationAge' => 'required|string|max:255',
+            'recommendationAgeRange' => 'required|string|max:255',
+            'recommendationCountry' => 'required|string|max:255',
             'recommendationLocation' => 'required|string|max:255',
             'recommendationInstruments' => 'required|string|max:255',
             'recommendationSimilarity' => 'required|string|max:255',
-            'recommendationUserType' => 'required|string|max:255',
+            'recommendationUserType' => 'required|string|max:255',          
             
         ]);
 
@@ -313,6 +295,8 @@ class UserController extends Controller
         $word5 = $request['word5'];
         $similarity = $request['similarity'];
         $instruments = $request['instruments'];
+
+
         //Recommendation
         $recommendationGenre = $request['recommendationGenre'];
         $recommendationWord1 = $request['recommendationWord1'];
@@ -321,13 +305,23 @@ class UserController extends Controller
         $recommendationWord4 = $request['recommendationWord4'];
         $recommendationWord5 = $request['recommendationWord5'];
         $recommendationAge = $request['recommendationAge'];
+        $recommendationAgeRange = $request['recommendationAgeRange'];
+        $recommendationCountry = $request['recommendationCountry']; 
         $recommendationLocation = $request['recommendationLocation'];    
         $recommendationInstruments = $request['recommendationInstruments'];
         $recommendationSimilarity = $request['recommendationSimilarity'];
         $recommendationUserType = $request['recommendationUserType'];
 
 
-       
+
+
+
+
+
+
+
+
+
 
         //Create User
         $user = new User();
@@ -351,19 +345,22 @@ class UserController extends Controller
         $user->word5 = $word5;
         $user->similarity = $similarity;
         $user->instruments = $instruments;
-        //Create User Recommendation
-        $user->recommendationGenre = $recommendationGenre;
-        $user->recommendationWord1 = $recommendationWord1;
-        $user->recommendationWord2 = $recommendationWord2;
-        $user->recommendationWord3 = $recommendationWord3;
-        $user->recommendationWord4 = $recommendationWord4;
-        $user->recommendationWord5 = $recommendationWord5;
-        $user->recommendationAge = $recommendationAge;
-        $user->recommendationLocation = $recommendationLocation;
-        $user->recommendationInstruments = $recommendationInstruments;
-        $user->recommendationSimilarity = $recommendationSimilarity;
-        $user->recommendationUserType= $recommendationUserType;
-        
+      
+                //Create User Recommendation
+                $user->recommendationGenre = $recommendationGenre;
+                $user->recommendationWord1 = $recommendationWord1;
+                $user->recommendationWord2 = $recommendationWord2;
+                $user->recommendationWord3 = $recommendationWord3;
+                $user->recommendationWord4 = $recommendationWord4;
+                $user->recommendationWord5 = $recommendationWord5;
+                $user->recommendationAge = $recommendationAge;
+                $user->recommendationAgeRange = $recommendationAgeRange;
+                $user->recommendationCountry = $recommendationCountry;
+                $user->recommendationLocation = $recommendationLocation;
+                $user->recommendationInstruments = $recommendationInstruments;
+                $user->recommendationSimilarity = $recommendationSimilarity;
+                $user->recommendationUserType= $recommendationUserType;
+
       
 
         $user->save();
@@ -401,10 +398,585 @@ class UserController extends Controller
       }
 
 
+      //Update Username
+      public function updateUsername(Request $request)
+      {
+          $user = Auth::user();
 
-    
-   
-   
+          $this->validate($request,[
+            'username' => 'string|max:255|unique:users',
+          ]);
+
+          $user->username = $request['username'];
+
+          $user->save();
+
+          return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your username!']);
+            
+      }
+
+      //Update Email
+      public function updateEmail(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+          'email' => 'string|max:255|unique:users',
+        ]);
+
+        $user->email = $request['email'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your email address!']);
+
+      }
+
+      //Update Password
+      public function updatePassword(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'password' => 'string|min:6|confirmed',
+        ]);
+
+        $user->password = bcrypt( $request['password']);
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your password!']);
+      }
+
+      //Update AgeRange
+      public function updateAgeRange(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'ageRange' => 'string|max:255',
+        ]);
+
+        $user->ageRange = $request['ageRange'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your age range!']);
+      }
+
+      //Update Age
+      public function updateAge(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'userAge' => 'string|max:255',
+        ]);
+
+        $user->userAge = $request['userAge'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your age!']);
+      }
+
+      //Update Country
+      public function updateCountry(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'country' => 'string|max:255',
+        ]);
+
+        $user->country = $request['country'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your set country location!']);
+      }
+
+      //Update Location
+      public function updateLocation(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'location ' => 'string|max:255',
+        ]);
+
+        $user->location = $request['location'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your location!']);
+      }
+
+      //Update User Type
+      public function updateUserType(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'userType ' => 'string|max:255',
+        ]);
+
+        $user->userType = $request['userType'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated the user type of the profile!']);
+      }
+
+      //Update Genre
+      public function updateGenre(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'genre ' => 'string|max:255',
+        ]);
+
+        $user->genre = $request['genre'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your genre!']);
+      }
+
+      //Update Description
+      public function updateDescription(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'profileDescription ' => 'string|max:255',
+        ]);
+
+        $user->profileDescription = $request['profileDescription'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your profile Description!']);
+      }
+
+      //Update SoundCloud Widget
+      public function updateSoundCloudWidget(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'soundCloudWidget ' => 'string|max:255',
+        ]);
+
+        $user->soundCloudWidget = $request['soundCloudWidget'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your soundcloud widget!']);
+      }
+
+      //Update SoundCloud Profile Widget
+      public function updateSoundCloudProfile(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'soundCloudProfile ' => 'string|max:255',
+        ]);
+
+        $user->soundCloudProfile = $request['soundCloudProfile'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your soundcloud profile!']);
+      }
+
+      //Update Spotify Profile
+      public function updateSpotify(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'spotifyProfile' => 'string|max:255',
+        ]);
+
+        $user->spotifyProfile = $request['spotifyProfile'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your spotify profile!']);
+      }
+
+      //Update Word1
+      public function updateWord1(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'word1' => 'string|max:255',
+        ]);
+
+        $user->word1 = $request['word1'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your word(1) that describes your music!']);
+      }
+
+      //Update Word2
+      public function updateWord2(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'word2' => 'string|max:255',
+        ]);
+
+        $user->word2 = $request['word2'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your word(2) that describes your music!']);
+      }
+
+      //Update Word3
+      public function updateWord3(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'word3' => 'string|max:255',
+        ]);
+
+        $user->word3 = $request['word3'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your word(3) that describes your music!']);
+      }
+
+      //Update Word4
+      public function updateWord4(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'word4' => 'string|max:255',
+        ]);
+
+        $user->word4 = $request['word4'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your word(4) that describes your music!']);
+      }
+
+      //Update Word5
+      public function updateWord5(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'word5' => 'string|max:255',
+        ]);
+
+        $user->word5 = $request['word5'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your word(5) that describes your music!']);
+      }
+
+      //Update Similarity
+      public function updateSimilarity(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'similarity' => 'string|max:255',
+        ]);
+
+        $user->similarity = $request['similarity'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your artist/band you are similar to!']);
+      }
+
+       //Update Similarity
+       public function updateInstruments(Request $request)
+       {
+         $user = Auth::user();
+ 
+         $this->validate($request,[
+             'instruments' => 'string|max:255',
+         ]);
+ 
+         $user->instruments = $request['instruments'];
+ 
+         $user->save();
+ 
+         return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your main instrument used in your music!']);
+       }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      //Update Recommendation AgeRange
+      public function updateRecommendationAgeRange(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'recommendationAgeRange' => 'string|max:255',
+        ]);
+
+        $user->recommendationAgeRange = $request['recommendationAgeRange'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your recommendation age range!']);
+      }
+
+      //Update Age
+      public function updateRecommendationAge(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'recommendationAge' => 'string|max:255',
+        ]);
+
+        $user->recommendationAge = $request['recommendationAge'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your recommendation age!']);
+      }
+
+      //Update Country
+      public function updateRecommendationCountry(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'recommendationCountry' => 'string|max:255',
+        ]);
+
+        $user->recommendationCountry = $request['recommendationCountry'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your recommendation country location!']);
+      }
+
+      //Update Location
+      public function updateRecommendationLocation(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'recommendationLocation ' => 'string|max:255',
+        ]);
+
+        $user->recommendationLocation = $request['recommmendationLocation'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your recommendation location!']);
+      }
+
+      //Update User Type
+      public function updateRecommendationUserType(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'recommendationUserType ' => 'string|max:255',
+        ]);
+
+        $user->recommendationUserType = $request['recommmendationUserType'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your recommendation user type!']);
+      }
+
+      //Update Genre
+      public function updateRecommendationGenre(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'recommendationGenre ' => 'string|max:255',
+        ]);
+
+        $user->recommendationGenre = $request['recommendationGenre'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your recommendationGenre!']);
+      }
+
+
+
+      //Update Word1
+      public function updateRecommendationWord1(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'recommendationWord1' => 'string|max:255',
+        ]);
+
+        $user->recommendationWord1 = $request['recommendationWord1'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your recommendation word(1)!']);
+      }
+
+      //Update Word2
+      public function updateRecommendationWord2(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'recommendationWord2' => 'string|max:255',
+        ]);
+
+        $user->recommendationWord2 = $request['recommendationWord2'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your recommendation word(2)!']);
+      }
+
+      //Update Word3
+      public function updateRecommendationWord3(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'recommmendationWord3' => 'string|max:255',
+        ]);
+
+        $user->recommendationWord3 = $request['recommendationWord3'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your recommendation word(3)!']);
+      }
+
+      //Update Word4
+      public function updateRecommendationWord4(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'recommendationWord4' => 'string|max:255',
+        ]);
+
+        $user->recommendationWord4 = $request['recommendationWord4'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your recommendation word(4)!']);
+      }
+
+      //Update Word5
+      public function updateRecommendationWord5(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'recommendationWord5' => 'string|max:255',
+        ]);
+
+        $user->recommendationWord5 = $request['recommendationWord5'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your recommendation word(5)!']);
+      }
+
+      //Update Similarity
+      public function updateRecommendationSimilarity(Request $request)
+      {
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'recommendationSimilarity' => 'string|max:255',
+        ]);
+
+        $user->recommendationSimilarity = $request['recommendationSimilarity'];
+
+        $user->save();
+
+        return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your similarity artist/band that your looking for!']);
+      }
+
+       //Update Similarity
+       public function updateRecommendationInstruments(Request $request)
+       {
+         $user = Auth::user();
+ 
+         $this->validate($request,[
+             'recommendationInstruments' => 'string|max:255',
+         ]);
+ 
+         $user->recommendationInstruments = $request['recommendationInstruments'];
+ 
+         $user->save();
+ 
+         return redirect()->route('MyProfile')->with(['message' => 'Successfully updated your recommendation instrument!']);
+       }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       public function MyDashboard()
       {
         //every user has a dashboard but only they can view it
@@ -426,23 +998,6 @@ class UserController extends Controller
             ->paginate(2);
             */
           
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //Recommendated UserType , Genre 
 $recommendationAvgMatch = DB::table('users')
@@ -697,6 +1252,7 @@ $following = DB::table('users')
           ->with('genreMatch' , $genreMatch)
           ->with('locationMatch', $locationMatch)
           ->with('following' , $following);
+          //->with('response' , $response);
          
 
       //The most popular artist or band on the website - It could be the Auth User

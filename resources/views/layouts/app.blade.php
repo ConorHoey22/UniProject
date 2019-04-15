@@ -38,7 +38,7 @@
       <ul class="nav navbar-nav">
       @if (Route::has('login'))
       @auth
-      <li class="active"><a href="{{ url('/userDashboard') }}">Home</a></li>
+    
   
       
       <!--This is the right side of the Navbar--> <!--Still can see login + signup FIX-->

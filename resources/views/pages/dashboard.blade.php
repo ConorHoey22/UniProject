@@ -89,7 +89,7 @@
                                 </div>
                                      
                            
-                            <button>Edit Recommentdation</button>
+     
 
 
                         </div>
@@ -145,7 +145,7 @@
                                                 <tr>
                                                 <td> <p class="overflow-visible"> {{ $selectedUser->username}}</p>  <!-- Username--></td>
                                                 <td><img class="img-rounded" src= "/storage/images/{{ $selectedUser->image }}" width=70/></td> <!-- IF COndition - no image found-->
-                                               
+
                                                 <td><p class="overflow-visible"> Genre: {{ $selectedUser->genre }} </p>  <!-- Genre--></td>
                                                 <td><p class="overflow-visible"> Description: {{ $selectedUser->profileDescription }} </p>  <!-- Profile Description--></td>
                                                 <td> 
@@ -258,9 +258,7 @@
 
 
 
-                        <div class="Navigation-Search">
-                            <button>Search</button>
-                        </div>
+                        
 
                     </div>
                 </div>

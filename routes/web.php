@@ -37,8 +37,57 @@ Route::post('/createRecommendation', 'UserController@createRecommendation')->nam
 
 Route::get('profile', 'UserController@profile');
 
-Route::post('profile', 'UserController@update_image');
+Route::post('upload_image', 'UserController@update_image')->name('upload_image');
 
+
+Route::post('upload', 'UploadController@upload');
+
+//Update User Details Routes----------------------------------------------------------------------------------------------
+Route::post('/updateUsername','UserController@updateUsername')->name('updateUsername');
+Route::post('/updateEmail','UserController@updateEmail')->name('updateEmail');
+Route::post('/updatePassword','UserController@updatePassword')->name('updatePassword');
+
+Route::post('/updateAgeRange','UserController@updateAgeRange')->name('updateAgeRange');
+Route::post('/updateAge','UserController@updateAge')->name('updateAge');
+Route::post('/updateCountry','UserController@updateCountry')->name('updateCountry');
+Route::post('/updateLocation','UserController@updateLocation')->name('updateLocation');
+Route::post('/updateUserType','UserController@updateUserType')->name('updateUserType');
+Route::post('/updateGenre','UserController@updateGenre')->name('updateGenre');
+Route::post('/updateDescription','UserController@updateDescription')->name('updateDescription');
+
+Route::post('/updateSoundCloudWidget','UserController@updateSoundCloudWidget')->name('updateSoundCloudWidget');
+Route::post('/updateSoundCLoudProfile','UserController@updateSoundCloudProfile')->name('updateSoundCloudProfile');
+Route::post('/updateSpotify','UserController@updateSpotify')->name('updateSpotify');
+
+Route::post('/updateWord1','UserController@updateWord1')->name('updateWord1');
+Route::post('/updateWord2','UserController@updateWord2')->name('updateWord2');
+Route::post('/updateWord3','UserController@updateWord3')->name('updateWord3');
+Route::post('/updateWord4','UserController@updateWord4')->name('updateWord4');
+Route::post('/updateWord5','UserController@updateWord5')->name('updateWord5');
+
+
+Route::post('/updateSimilarity','UserController@updateSimilarity')->name('updateSimilarity');
+Route::post('/updateInstruments','UserController@updateInstruments')->name('updateInstruments');
+//-------------------------------------------------------------------------------------------------------------------
+
+
+
+//Update Recommendation Details Routes----------------------------------------------------------------------------------------------
+Route::post('/updateRecommendationAgeRange','UserController@updateRecommendationAgeRange')->name('updateRecommendationAgeRange');
+Route::post('/updateRecommendationAge','UserController@updateRecommendationAge')->name('updateRecommendationAge');
+Route::post('/updateRecommendationCountry','UserController@updateRecommendationCountry')->name('updateRecommendationCountry');
+Route::post('/updateRecommendationLocation','UserController@updateRecommendationLocation')->name('updateRecommendationLocation');
+Route::post('/updateRecommendationUserType','UserController@updateRecommendationUserType')->name('updateRecommendationUserType');
+Route::post('/updateRecommendationGenre','UserController@updateRecommendationGenre')->name('updateRecommendationGenre');
+Route::post('/updateRecommendationWord1','UserController@updateRecommendationWord1')->name('updateRecommendationWord1');
+Route::post('/updateRecommendationWord2','UserController@updateRecommendationWord2')->name('updateRecommendationWord2');
+Route::post('/updateRecommendationWord3','UserController@updateRecommendationWord3')->name('updateRecommendationWord3');
+Route::post('/updateRecommendationWord4','UserController@updateRecommendationWord4')->name('updateRecommendationWord4');
+Route::post('/updateRecommendationWord5','UserController@updateRecommendationWord5')->name('updateRecommendationWord5');
+
+Route::post('/updateRecommendationSimilarity','UserController@updateRecommendationSimilarity')->name('updateRecommendationSimilarity');
+Route::post('/updateRecommendationInstruments','UserController@updateRecommendationInstruments')->name('updateRecommendationInstruments');
+//-------------------------------------------------------------------------------------------------------------------
 
 
 Route::get('/followFunction/{id}', [
@@ -71,11 +120,7 @@ Route::get('/MyProfile', [
 ]);
 
 
-Route::get('/updatePost', [
-    'uses' => 'UserController@updatePost',
-    'as' => 'updatePost',
-    'middleware' => 'auth'
-]);
+
 
 
 Route::get('/delete-post/{post_id}', [
