@@ -189,12 +189,7 @@ class UserController extends Controller
 
         }
 
-
-
-
-
-
-
+        
     public function createPost(Request $request)
     {
         //valdation
@@ -723,18 +718,6 @@ class UserController extends Controller
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
       //Update Recommendation AgeRange
       public function updateRecommendationAgeRange(Request $request)
       {
@@ -946,80 +929,8 @@ class UserController extends Controller
        }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       public function MyDashboard()
       {
-        //every user has a dashboard but only they can view it
-
-        //Exact Match Query - This is when all recommendation conditions are matched with another user 
-
-      //Thats working  - Recommendation  Match 
-    /*  $recommendationExact = DB::table('users')
-            ->select('username')
-            ->where('id', '!=', Auth::id()) // Can't be the  current Auth User Details *Required*
-            ->where('genre', '=' , Auth::user()->recommendationGenre) // This is a required where clause for all statements  *Required*
-            ->where('userType', '=' , Auth::user()->recommendationUserType) // Find the userType they have requested *Required*
-            ->where('location', '=' , Auth::user()->recommendationLocation)  //Find  thej location of the Artist/Band , they have requested *Required*
-            ->whereIn('word1', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-            ->whereIn('word2', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-            ->whereIn('word3', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-            ->whereIn('word4', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-            ->whereIn('word4', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-            ->paginate(2);
-            */
-          
-
-//Recommendated UserType , Genre 
-$recommendationAvgMatch = DB::table('users')
-            ->select('username')
-            ->where('id', '!=', Auth::id()) // Can't be the  current Auth User Details *Required*
-            ->where('genre', '=' , Auth::user()->recommendationGenre) // This is a required where clause for all statements  *Required*
-            ->where('userType', '=' , Auth::user()->recommendationUserType) // Find the userType they have requested *Required*
-            ->paginate(2);
-//Recommendated UserTy
-
-
-
-//WOrking
-
-//Recommendation System – currently it looks at all 5 of the users recommendation words 
-//and find all the users with at least one of those words(they have enter that describes their band or themselves)
-
-
-//Artist match based on Words
-//$recommendationWordsQuery=  User::where('id', '<>', Auth::user()->id)
-//->select('username' , 'location')
-//->where('userType', '=' , 'Artist') // Find the userType they have requested *Required*
 
 
 
@@ -1094,90 +1005,6 @@ $recommendationBandWordsQuery=  User::where('id', '<>', Auth::user()->id)
  ->paginate(6); // NEED TO DETERMINE HOW MANY USERS WILL BE RETURNED
 
 
-//Below are Test Querys to try and find the word attached to the user (Find Username)
-
-        //IF return is successful - 1 point match 
-   
-
-        $recommendationQuery2=  User::where('id', '<>', Auth::user()->id)
-        ->select('username')
-        ->whereIn('word1', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-        ->whereIn('word2', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-        ->paginate(2); 
-  
-       
-        //IF return is successful - 2 points match 
-  
-  
-        $recommendationQuery3=  User::where('id', '<>', Auth::user()->id)
-        ->select('username')
-        ->whereIn('word1', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-        ->whereIn('word2', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-        ->whereIn('word3', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-        ->paginate(2); 
-
-        //IF ABOVE return is successful - 3 points match 
-  
-        $recommendationQuery4=  User::where('id', '<>', Auth::user()->id)
-        ->select('username')
-        ->whereIn('word1', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-        ->whereIn('word2', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-        ->whereIn('word3', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-        ->whereIn('word4', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-        ->paginate(2); 
-  
-         //IF ABOVE return is successful - 4 points match
-
-
-         $recommendationQuery5=  User::where('id', '<>', Auth::user()->id)
-         ->select('username')
-         ->whereIn('word1', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-         ->whereIn('word2', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-         ->whereIn('word3', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-         ->whereIn('word4', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-         ->whereIn('word4', [Auth::user()->recommendationWord1,Auth::user()->recommendationWord2,Auth::user()->recommendationWord3,Auth::user()->recommendationWord4 , Auth::user()->recommendationWord5])
-         ->paginate(2); 
-
-        //IF ABOVE return is successful - 5 points match
-
-
-            //FInd the best match now 
-                //Return ... 
-
-
-//THINK WE NEED GROUPING
-
-// IF Where clasue finds a result is true then go to next statement 
-//if 
-    //Word2 == what happens (Test) only word 2 not word1 // so to where cluases
-
-
-  
-        //NEED  TO test 
-
-   //WHat happens if not in the DB 
-   //Word2 == what happens (Test)
-
-
-
-
-
-
-
- //need a scoring system for if word1 = ... then 1 point
- //if score is = 2 then select the user 
- //if 1 then return that user
- //display the best score 
-
-
- //What if word is in recommendationword4 and 5 
-//End search after word search as its found?if recommendationword1 is found end search  ??
-
-
-
-
-
-
 
 
 
@@ -1191,12 +1018,7 @@ $recommendationBandWordsQuery=  User::where('id', '<>', Auth::user()->id)
             //What if no user is found we need to tell the user to edit their recommendation details
             
 
-       //Followers Match - need to add this into the system - (Following system)
-       // $followersMatch = DB::table('users')
-        //->select('username')
-        //->where('id', '!=', Auth::id()) // Can't be the  current Auth User Details 
-        //->where('genre', '=' , Auth::user()->recommendationFollowers)  
-        //->get();
+      
 
        //Location Match
        $locationMatch = DB::table('users')
@@ -1226,22 +1048,13 @@ $recommendationBandWordsQuery=  User::where('id', '<>', Auth::user()->id)
        ->get();
 
 
-      // List of all the users that the logged in user is following 
+ // List of all the users that the logged in user is following 
 
 $following = DB::table('users')
  
    ->leftJoin('follower','follower.userid', '=', 'users.id')
    ->where('follower.follower_id', '=', Auth::id())
    ->get();
-
-
-
-
-
-     //   if ()
-//$table1 = $table2
-
-//and $Authid = id inn followers 
 
       //Return Variables
           return view ('pages.dashboard')
@@ -1255,12 +1068,7 @@ $following = DB::table('users')
           //->with('response' , $response);
          
 
-      //The most popular artist or band on the website - It could be the Auth User
-    //  $mostPopularUser = DB::table('users')
-      //->select('username')
-      //->where('followers', '=' , Auth::user()->recommendationLocation)  
-      //->get();
-
+   
       }
    
 

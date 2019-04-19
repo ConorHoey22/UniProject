@@ -1,11 +1,8 @@
 @extends('layouts.userLayout')
 
 <!-- Profile-->
-
 @section('content')
 <link href="/css/design.css" rel="stylesheet" type="text/css">
-
-
 
 <div class="container">
     <div class="row justify-content-center">
@@ -46,20 +43,13 @@
             <div class="profile-header-container">
                 <div class="profile-header-img">
                
-
-
-                <img class="img-rounded" src= "/storage/app/public/images/{{ Auth::user()->image }}" width=70/>  
+                <img class="img-rounded" src= "/storage/app/public/images/{{ Auth::user()->image }}" width=170/>  
                     <div class="rank-label-container">
                         <span class="label label-default rank-label">{{$user->name}}</span>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
-
 
         <div class="row justify-content-center">
             <form action="{{ route('upload_image') }}" method="post" enctype="multipart/form-data">
@@ -76,10 +66,6 @@
 
 <br>
 
-
-
-
-
 <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#profileModal">Edit Profile Details</button>
 <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#recommendationModal">Edit Recommendation Details</button>
 
@@ -94,7 +80,6 @@
             </div>
 
         <div class="modal-body"> 
-
                     
                  <!--Update Username-->
                      <form method="POST" action="{{ route('updateUsername') }}" enctype="multipart/form-data">
@@ -117,7 +102,6 @@
                                 </div>
                             </div>
 
-
                         <!--Update email-->
                         <form method="POST" action="{{ route('updateEmail') }}" enctype="multipart/form-data">
                         @csrf
@@ -136,7 +120,6 @@
                         </div>
 
                         </form>
-
 
                         <!--Password-->
                         <form method="POST" action="{{ route('updatePassword') }}" enctype="multipart/form-data">
@@ -164,7 +147,6 @@
                         </div>
                         </form>
 
-
                          <!--Location-->
                          <form method="POST" action="{{ route('updateLocation') }}" enctype="multipart/form-data">
                          @csrf
@@ -177,7 +159,6 @@
                         </div>   
                         </form>
 
-
                         <!--Country-->  
                         <form method="POST" action="{{ route('updateCountry') }}" enctype="multipart/form-data">
                         @csrf
@@ -189,7 +170,6 @@
                             </div>
                         </div>
                         </form>
-
 
                         <!--Age-->
                         <form method="POST" action="{{ route('updateAge') }}" enctype="multipart/form-data">
@@ -204,7 +184,6 @@
                         </div>
                         </form>
 
-
                         <!--AgeRange-->
                         <form method="POST" action="{{ route('updateAgeRange') }}" enctype="multipart/form-data">
                         <div class="form-group row">
@@ -217,7 +196,6 @@
 
                          </div>
                         </form>
-
 
                         <!--UserTypes-->
                         <form method="POST" action="{{ route('updateUserType') }}" enctype="multipart/form-data">
@@ -234,9 +212,6 @@
                                 </div>
                         </div>
                         </form>
-
-
-
 
                          <!--Prefered Genre -->
                          <form method="POST" action="{{ route('updateGenre') }}" enctype="multipart/form-data">
@@ -265,7 +240,6 @@
                         </div>  
                         </form>
 
-
                         <!--SoundCloud Widget-->
                         <form method="POST" action="{{ route('updateSoundCloudWidget') }}" enctype="multipart/form-data">
                          @csrf
@@ -277,8 +251,7 @@
                                 </div>
                             </div>
                         </form>
-
-            
+    
                     <!--SoundCloud Logo which link to your profile-->
                     <form method="POST" action="{{ route('updateSoundCloudProfile') }}" enctype="multipart/form-data">
                     @csrf
@@ -303,9 +276,7 @@
                         </div>
                     </form>
 
-
-
-                    <p>Choose 5 words that describe your style of music</p>
+                   <p>Choose 5 words that describe your style of music</p>
                     <!--Word 1 -- Used to describe the artists/bands style of music-->
                     <form method="POST" action="{{ route('updateWord1') }}" enctype="multipart/form-data">
                     @csrf
@@ -318,7 +289,6 @@
                         </div>
                     </form>
 
-
                     <!--Enter a word option - only if the user selects enter a word in the selection box-->
                     <form method="POST" action="{{ route('updateWord1') }}" enctype="multipart/form-data">
                     @csrf
@@ -330,7 +300,6 @@
                         </div>   
 
                     </form>
-
 
                     <!--Word 2-- Used to describe the artists/bands style of music-->
                     <form method="POST" action="{{ route('updateWord2') }}" enctype="multipart/form-data">
@@ -356,7 +325,6 @@
                     
                     </form>
 
-
                 <!--Word 3-- Used to describe the artists/bands style of music-->
                 <form method="POST" action="{{ route('updateWord3') }}" enctype="multipart/form-data">
                     @csrf
@@ -381,7 +349,6 @@
 
                 </form>
 
-
                 <!--Word 4-- Used to describe the artists/bands style of music-->
                 <form method="POST" action="{{ route('updateWord4') }}" enctype="multipart/form-data">
                 @csrf
@@ -395,7 +362,6 @@
                 
                 </form>
           
-
                     <!--Enter a word option - only if the user selects enter a word in the selection box-->
                     <form method="POST" action="{{ route('updateWord4') }}" enctype="multipart/form-data">
                     @csrf
@@ -407,10 +373,6 @@
                         </div>   
 
                     </form>
-
-               
-
-
 
                 <!--Word 5-- Used to describe the artists/bands style of music-->
                 <form method="POST" action="{{ route('updateWord5') }}" enctype="multipart/form-data">
@@ -425,7 +387,6 @@
                 
                 </form>
           
-
                     <!--Enter a word option - only if the user selects enter a word in the selection box-->
                     <form method="POST" action="{{ route('updateWord5') }}" enctype="multipart/form-data">
                         @csrf
@@ -437,11 +398,6 @@
                     </div>   
 
                     </form>
-
-
-
-
-
 
                 <!--Similarity Artist/Band--> <!--Artist/ BAnd only-->
                 <form method="POST" action="{{ route('updateSimilarity') }}" enctype="multipart/form-data">
@@ -465,7 +421,6 @@
                             <input id="instruments" type="text"  name="instruments" class= "form-control input" placeholder = "Enter the main instrument">
                         </div>
                     </div>     
-
                 </form>
 
                 </div>
@@ -475,23 +430,10 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
-
-
-
-
-
-
-                             
-                                </div>
-
-
-
+     </div>
 
 <!--Modal : Edit Recommendation -->
-
 <!--Modal: This will only appear once the user click the "Edit Profile" Button-->
 <div class="modal fade" id="recommendationModal"  tabindex="-1" role="dialog" aria-labelledby="recommendationModalLabel">
       <div class="modal-dialog" role="document">
@@ -504,9 +446,6 @@
 
         <div class="modal-body"> 
 
-     
-
-                    
                          <!--Location-->
                          <form method="POST" action="{{ route('updateRecommendationLocation') }}" enctype="multipart/form-data">
                          @csrf
@@ -577,9 +516,6 @@
                         </div>
                         </form>
 
-
-
-
                          <!--Prefered Genre -->
                          <form method="POST" action="{{ route('updateRecommendationGenre') }}" enctype="multipart/form-data">
                          @csrf
@@ -594,8 +530,6 @@
                    
                         </div>
                         </form>
-
-
 
                     <p>Choose 5 words that describe your style of music</p>
                     <!--Word 1 -- Used to describe the artists/bands style of music-->
@@ -701,9 +635,6 @@
                     </form>
 
                
-
-
-
                 <!--Word 5-- Used to describe the artists/bands style of music-->
                 <form method="POST" action="{{ route('updateRecommendationWord5') }}" enctype="multipart/form-data">
                 @csrf
@@ -729,11 +660,6 @@
                     </div>   
 
                     </form>
-
-
-
-
-
 
                 <!--Similarity Artist/Band--> <!--Artist/ BAnd only-->
                 <form method="POST" action="{{ route('updateRecommendationSimilarity') }}" enctype="multipart/form-data">
@@ -769,27 +695,19 @@
                 </div>
 
             </div>
-
                                 </div>
-
 
                                 <!--Username of current Logged in user--  {{ Auth::user()->username }} -->
                                 <div class = "displayCurrentUser">
-                                  
-
+                                
                                             <p> {{ Auth::user()->username}} </p>
                             
-                                 
                                 </div>
 
                                 <!--Location of current Logged in user-->
                                 <div class = "displayLocation">
                                
-                              
-
                                         <p> Location: {{ Auth::user()->location}} </p>
-
-                            
 
                                 </div>
 
@@ -802,7 +720,7 @@
 
                                 <!--Social Media of current Logged in user-->
                                 <div class = "ProfileDescription">
-                           <center>     <h3><b><u>My Description</b></u></h3>
+                                <h3><b><u>My Description</b></u></h3>
                                     <!--This value needs to inserted during registration-->
                                     <p> {{ Auth::user()->profileDescription}} </p>
                                 
@@ -866,7 +784,7 @@
                                 @endforeach
                             </div>
                             </section>
-</center>
+
 
                          <!--SoundCloud of current Logged in user-->
                          <div class = "SoundCloud">
@@ -887,26 +805,13 @@
                                         
                                 </div> 
 
-
-
-
-
-
-
-
    <!-- FILL AGE RANGES DROPDOWN WITH JSON FILE--->
-   <script src = "/js/populateAgeRanges.js"></script>   
+   <script src = "/js/populateAgeRanges.js"></script>  
 
 <!-- FILL DROPDOWN WITH GENRE JSON FILE--->
 <script src = "/js/populateGenres.js"></script>   
-
  <!-- FILL DROPDOWN WITH Words JSON FILE--->
 <script src = "/js/populateWords.js"></script>   
-
-
-
-
-
 
                          </div>
 

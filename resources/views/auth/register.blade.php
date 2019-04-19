@@ -4,19 +4,7 @@
 <!--UserType Script-->
 <script src = "/js/userType.js"></script> 
 
-
-
- 
-
-
-
-
-
-
 <!--Words that describes the Artist/Band JavaScript -- This will allow the user to enter a word and disappear when not needed. -->
-
-
-
 
 <div class="container">
     <div class="row justify-content-center">
@@ -110,9 +98,6 @@
                                 
                         </div>
 
-
-
-
   <!--UserTypes-->
   <div class="form-group row">
                         <label for="userType" class="col-md-4 col-form-label text-md-right">{{ __('Type of user:') }}</label>
@@ -139,21 +124,8 @@
     </div>
 </div>
 
-
-
-
-
-
-
-                        
 <div class= "ArtistBandRegForm" id ="ArtistBandRegForm" style="display: none;">
       
-
-
-
-
-                   
-
                          <!--Prefered Genre -->
                         <div class="form-group row">
                             <label for="genre" class="col-md-4 col-form-label text-md-right">{{ __('Please select a genre of music you usually peform:') }}</label>
@@ -166,9 +138,6 @@
                    
                         </div>
 
-
-                        
-                    
                         <!--Profile Description-->
                         <div class="form-group row">
                             <label for="profileDescription" class="col-md-4 col-form-label text-md-right">{{ __('Profile Description:') }}</label>
@@ -178,8 +147,8 @@
                             </div>
                         </div>  
 
-                           <!--SoundCloud Widget--   Not required --->
-                     <div class="form-group row">
+<!--SoundCloud Widget--   Not required --->
+<div class="form-group row">
 
 <label for="soundCloudWidget" class="col-md-4 col-form-label text-md-right">{{ __('Attach your SoundCloud Details:') }}</label>
 <div class="col-md-6">
@@ -192,7 +161,6 @@
 </div>
 
 </div>
-
 
 
 <!--SoundCloud Logo which link to your profile--   Not required -->
@@ -213,22 +181,14 @@
 </div>
 </div>
 
-
-       <!-- FILL AGE RANGES DROPDOWN WITH JSON FILE--->
-       <script src = "/js/populateAgeRanges.js"></script>   
+ <!-- FILL AGE RANGES DROPDOWN WITH JSON FILE--->
+<script src = "/js/populateAgeRanges.js"></script>   
 
 <!-- FILL DROPDOWN WITH GENRE JSON FILE--->
 <script src = "/js/populateGenres.js"></script>   
 
   <!-- FILL DROPDOWN WITH Words JSON FILE--->
   <script src = "/js/populateWords.js"></script>   
-
-
-
-
-
-
-
 
 
 <p>Choose 5 words that describe your style of music</p>
@@ -251,21 +211,6 @@
     }
 
 </script> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <div class="form-group row">
     <div class="col-md-6">
@@ -311,12 +256,12 @@
 
 </div>
 
-    <!--Enter a word option - only if the user selects enter a word in the selection box
+    <!--Enter a word option - only if the user selects enter a word in the selection box -->
     <div class="form-group row">
             <div class="col-md-6" >
                 <input id="word3input" type="text"  name="word3" class= "form-control input" style = "display: none;">
         </div>
-    </div>  -->
+    </div>  
 
 
 <!--Word 4-- Used to describe the artists/bands style of music-->
@@ -327,12 +272,12 @@
     </div>
 </div>
 
-    <!--Enter a word option - only if the user selects enter a word in the selection box
+    <!--Enter a word option - only if the user selects enter a word in the selection box -->
     <div class="form-group row">
             <div class="col-md-6" >
                 <input id="word4input" type="text"  name="word4" class= "form-control input" style = "display: none;"> 
            </div>
-    </div>   -->
+    </div>   
 
 
 <!--Word 5-- Used to describe the artists/bands style of music-->
@@ -343,12 +288,12 @@
     </div>
 </div>
 
-    <!--Enter a word option - only if the user selects enter a word in the selection box
+    <!--Enter a word option - only if the user selects enter a word in the selection box -->
     <div class="form-group row">
             <div class="col-md-6" >
                 <input id="word5input" type="text"  name="word5" class= "form-control input" style = "display: none;">
         </div>
-    </div>   -->
+    </div>   
 
 
 
@@ -369,53 +314,7 @@
     </div>
 </div>     
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
-
-
-
-
-
-
-
-
-
-
 
 <script src = "/css/dailyMusic.js"></script> 
 
@@ -429,11 +328,9 @@
   <script src = "/js/populateWords.js"></script>   
 
 
+ <!--Recommendation User Details for the Recommendation System-->
 
-
-                <!--Recommendation User Details for the Recommendation System-->
-
-                <div class = "getRecommendationInfo">
+<div class = "getRecommendationInfo">
 
 <div class = "RecommendationTitle">
     <h1> Lets find some artists or bands which you may like to listen to!</h1>
@@ -467,26 +364,6 @@
 >
 <!-- Words to find a match   / Selection of a few words  --- FIX THIS !!  -->
 <div class = "WordsList" >
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             <div class="form-group row">
                 <br>
@@ -564,7 +441,7 @@
                 </div>
             </div>  
 
-            <!--Enter a word option - only if the user selects enter a word in the selection box
+            <!--Enter a word option - only if the user selects enter a word in the selection box -
             <div class="form-group row">
                   <div class="col-md-6" >
                      <input id="recommendationWord4input" type="text"  name="recommendationWord4" class= "form-control input" style = "display: none;" placeholder = "Enter a word" />
@@ -589,7 +466,8 @@
              <div class="form-group row">
                   <div class="col-md-6">
                      <input id="recommendationWord5input" type="text"  name="recommendationWord5" class= "form-control input" style = "display: none;" placeholder = "Enter a word" />
-                 </div> -->
+                 </div> 
+            <div> -->
 
 </div>
 
@@ -611,8 +489,6 @@
             </div>    
 </div>
 </div>
-
-
 <!-- Age range of Artist/Band -->
 <div class = "AgeRange">
     <div class="form-group row">
@@ -628,7 +504,6 @@
             </div>    
 </div>
 </div>
-
 <!-- Location of the Artist/Band -->
 <div class = "LocationInput">
 <div class="form-group row">
@@ -660,7 +535,6 @@
             </div>    
 </div>
 </div>
-
 <!-- Instruments the artist/band use in their music -->  <!-- list or Input -->
 <!-- Then they enter an instruments at registeration or edit , and it is added to the json file which contains a list of instruments-->
 <div class = "InstrumentsList">
@@ -676,9 +550,6 @@
                                   <!-- Instruments input box-->
                             <input id="recommendationInstruments" type="text"  name="recommendationInstruments" class= "form-control"> 
 
-
-
-                            
                     
                     </div>
                 </div>    
@@ -700,12 +571,6 @@
                 </div>    
     </div>
 
-
-
-
-
-
-
 <!-- UserType-->
 <div class = "userType">
     <div class="form-group row">
@@ -723,11 +588,6 @@
                 </div>
             </div>    
     </div>
-
-
-  
-
-   
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

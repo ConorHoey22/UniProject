@@ -2,19 +2,14 @@
    //Registration form 
    $("#country").hide();
 
-
-
 $(document).ready(function(){
     $('#userType').on('change', function() {
       if ( this.value == 'Artist')
-  
       {
         $("#ArtistBandRegForm").show();
         $("#BandRegForm").hide();
         $("#ListenerRegForm").hide();
         $("BandOnly").hide();
-
-    
 
       }
       else if (this.value == "Band")
@@ -22,20 +17,18 @@ $(document).ready(function(){
         $("#ArtistBandRegForm").show();
         $("BandOnly").show();
         $("#ListenerRegForm").hide();
-
-           
+          
       }
       else if(this.value == "Listener")
       {
         $("#ArtistBandRegForm").hide();
         $("#ListenerRegForm").show();
         $("BandOnly").hide();
-       
-
-
+      
       }
 
-      else {
+      else 
+      {
         $("#ArtistBandRegForm").hide();
         $("BandOnly").hide();
         $("#ListenerRegForm").hide();

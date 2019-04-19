@@ -4,7 +4,7 @@
 
 @section('content')
 <link href="/css/design.css" rel="stylesheet" type="text/css">
-
+<center>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -13,7 +13,7 @@
                                 <div class = "displayProfileImage">
                                     <p>
                                     <!--Profile Image-->
-                                    <img class="rounded-circle" src="/storage/images/{{ $user->image }}" />
+                                    <img class="img-rounded" src= "/storage/app/public/images/{{ $user->image }}" width=170/> 
                                     
                                     </p>
                                 </div>
@@ -30,7 +30,7 @@
                                  
                                 </div>
 
-
+</center>
                                 
                                 <div class = "followBtn">
                     
@@ -175,7 +175,7 @@
 </div>
                  
         
-  
+     
 
 
 

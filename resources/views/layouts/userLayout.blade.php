@@ -57,7 +57,7 @@
          @auth
           <li class="active"><a href="{{ url('/MyDashboard') }}">Home</a></li>
           <li><a href="{{ url('/MyProfile') }}">Profile</a></li>
-          <li><a href="{{ url('/dailyMusic') }}">Daily Music</a></li>
+          <li><a href="{{ url('/dailyMusic') }}">Spotify Music Finder</a></li>
           <li><a href="{{ url('logout') }}">Log out</a></li>
         </ul>
          <!--This is the right side of the Navbar--> 

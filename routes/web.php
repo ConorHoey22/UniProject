@@ -12,27 +12,18 @@
 */
 
 
-
-
-
-
     Route::get('/', function () {
         return view('pages.welcome');
     });
     
  
-    Route::post('/signup','UserController@postSignUp')->name('postsignup');
+Route::post('/signup','UserController@postSignUp')->name('postsignup');
     
-    Route::post('/signin','UserController@postSignIn')->name('signinUser');
+Route::post('/signin','UserController@postSignIn')->name('signinUser');
 
 Route::post('/createPost', 'UserController@createPost')->name('createPost');
 
 Route::post('/createRecommendation', 'UserController@createRecommendation')->name('createRecommendation');
-
-//Route::get('/userProfile', 'UserController@index')->name('profile');
-//Route::get('/deletePost', 'PostsController@getDelete')->name('postDelete');
-
-//Route::get('/deletePost/{postID}', 'PostsController@getDelete')->name('delPost');
 
 
 Route::get('profile', 'UserController@profile');

@@ -33,15 +33,15 @@
                                             <tbody>
                                                 <tr>
                                                 <td> <p class="overflow-visible"> {{ $selectedUser->username}}</p>  <!-- Username--></td>
-                                                <td><img class="img-rounded" src= "/storage/images/{{ $selectedUser->image }}" width=70/></td> <!-- IF COndition - no image found-->
+                                                <td><img class="img-rounded" src= "/storage/app/public/images/{{ $selectedUser->image }}" width=70/> 
                                                
                                                 <td><p class="overflow-visible"> Genre: {{ $selectedUser->genre }} </p>  <!-- Genre--></td>
                                                 <td><p class="overflow-visible"> Description: {{ $selectedUser->profileDescription }} </p>  <!-- Profile Description--></td>
-                                                <td> 
+                                                
                                                 <button type="button" class="btn btn-success">
                                                 <i class="fas fa-user-circle"></i> <br><a href="{{ route('user.profile', $selectedUser->username) }}">View Profile</a>
                                                 </button>
-                                                </td>
+                                                
                                                 </tr>
                                             </tbody>
                                             </table>
@@ -72,11 +72,11 @@
                                          
                                                 <td><p> Genre: {{ $selectedUser->genre }} </p>  <!-- Genre--></td>
                                                 <td><p> Description: {{ $selectedUser->profileDescription }} </p>  <!-- Profile Description--></td>
-                                                <td> 
+                                                
                                                 <button type="button" class="btn btn-success">
                                                 <i class="fas fa-user-circle"></i> <br><a href="{{ route('user.profile', $selectedUser->username) }}">View Profile</a>
                                                 </button>
-                                                </td>
+                                                
                                                 </tr>
                                             </tbody>
                                             </table>
@@ -95,7 +95,7 @@
                         </div>
 
                       
-                        </div>
+                        
 
 
                         <div class = "genreMatch">
@@ -113,11 +113,13 @@
                                                
                                                 <td><p class="overflow-visible"> Genre: {{ $selectedUser->genre }} </p>  <!-- Genre--></td>
                                                 <td><p class="overflow-visible"> Description: {{ $selectedUser->profileDescription }} </p>  <!-- Profile Description--></td>
-                                                <td> 
+                                                 
                                                 <button type="button" class="btn btn-success">
                                                 <i class="fas fa-user-circle"></i> <br><a href="{{ route('user.profile', $selectedUser->username) }}">View Profile</a>
                                                 </button>
-                                                </td>
+                                                
+
+                            
                                                 </tr>
                                             </tbody>
                                             </table>
@@ -143,16 +145,17 @@
                                             <table class= "table">
                                             <tbody>
                                                 <tr>
+                                                
                                                 <td> <p class="overflow-visible"> {{ $selectedUser->username}}</p>  <!-- Username--></td>
                                                 <td><img class="img-rounded" src= "/storage/images/{{ $selectedUser->image }}" width=70/></td> <!-- IF COndition - no image found-->
 
                                                 <td><p class="overflow-visible"> Genre: {{ $selectedUser->genre }} </p>  <!-- Genre--></td>
                                                 <td><p class="overflow-visible"> Description: {{ $selectedUser->profileDescription }} </p>  <!-- Profile Description--></td>
-                                                <td> 
+                                                 
                                                 <button type="button" class="btn btn-success">
                                                 <i class="fas fa-user-circle"></i> <br><a href="{{ route('user.profile', $selectedUser->username) }}">View Profile</a>
                                                 </button>
-                                                </td>
+                                                
                                                 </tr>
                                             </tbody>
                                             </table>
@@ -183,11 +186,11 @@
                                      
                                                 <td><p> Genre: {{ $selectedUser->genre }} </p>  <!-- Genre--></td>
                                                 <td><p> Description: {{ $selectedUser->profileDescription }} </p>  <!-- Age(Band) --></td>
-                                                <td> 
+                                                
                                                 <button type="button" class="btn btn-success">
                                                 <i class="fas fa-user-circle"></i> <br><a href="{{ route('user.profile', $selectedUser->username) }}">View Profile</a>
                                                 </button>
-                                                </td>
+                                                
                                                 </tr>
                                             </tbody>
                                             </table>
@@ -214,11 +217,11 @@
                                         
                                                 <td><p> Genre: {{ $selectedUser->genre }} </p>  <!-- Genre--></td>
                                                 <td> Description: <p>{{ $selectedUser->profileDescription }} </p></td><!-- Profile Description-->
-                                                <td> 
+                                                 
                                                 <button type="button" class="btn btn-success">
                                                 <i class="fas fa-user-circle"></i> <br><a href="{{ route('user.profile', $selectedUser->username) }}">View Profile</a>
                                                 </button>
-                                                </td>
+                                                
                                                 </tr>
                                             </tbody>
                                             </table>
