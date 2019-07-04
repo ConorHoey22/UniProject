@@ -8,3 +8,20 @@ PostController handles user posts
 A user can register, login , create a post , edit a post , follow another user , unfollow , view other users profiles. 
 
 Note - There are some unused files but these ater for future developments
+
+
+Files
+ 
+# Registeration System
+  Description
+  Files
+  Frontend
+  
+# Login System
+  Description
+  Files
+  Frontend
+  
+  
+  
+  
