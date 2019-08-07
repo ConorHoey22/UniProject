@@ -1,6 +1,19 @@
 # UniProject
 
-Music social media website - Final Year Project using HTML , CSS , PHP ,MYSQL and Laravel. Also contains a function which allows the user to request data from the spotify API which is then displayed using spotify widgets.
+This is my final year project which is a Music social media website using HTML , CSS , PHP ,MYSQL and Laravel PHP. 
+The aim of this website is to allow users to discover new music artists and bands and also artists and bands can use this platform to promote themselves.
+
+Functions of the website:
+
+- User Registeration and Login System
+- User Following System
+- User Recommendation System
+- Custom Spotify Recommendation System
+- User Profiles pages
+- Users Posts 
+
+
+Also contains a function which allows the user to request data from the spotify API which is then displayed using spotify widgets.
 
 UserController contains all functions of the website 
 PostController handles user posts 
