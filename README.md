@@ -1,6 +1,6 @@
 # UniProject
 
-This is my final year project which is a Music social media website using HTML , CSS , PHP ,MYSQL and Laravel PHP. 
+This is my final year project which is a Music social media website using HTML , CSS , PHP ,MYSQL and Laravel PHP and Bootstrap. 
 The aim of this website is to allow users to discover new music artists and bands and also artists and bands can use this platform to promote themselves. This website also contains a function which allows the users to request data from the Spotify API which is then displayed using spotify widgets.(Custom Spotify Recommendation System).
 
 Functions of the website:
@@ -14,18 +14,20 @@ Functions of the website:
 - Users Posts 
 - Edit & Delete Posts
 
-
-
-
 UserController contains all functions of the website 
 PostController handles user posts 
 
-A user can register, login , create a post , edit a post , follow another user , unfollow , view other users profiles. 
-
 Note - There are some unused files but these ater for future developments
 
+# Improvements to be made:
+
+- Separate Functions into different controllers
+- Possibly use Vue.js alongside Laravel
+- Improvements to to the frontend design as the current frontend contains basic 
+
 # Spotify API - Advanced Recommendation System  (SpotifyController.php)
-This project utilied Larafy ( https://github.com/rennokki/larafy ) which  is a PHP API Wrapper for Spotify API. This wrapper is more oriented over Spotifys Client Credentials authenticated endpoints. This was just an addition feature of my uni assignment.
+
+This project utilies Larafy ( https://github.com/rennokki/larafy ) which  is a PHP API Wrapper for Spotify API. This wrapper is more oriented over Spotifys Client Credentials authenticated endpoints. This was just an addition feature of my uni assignment.
 ```
 <?php
 namespace App\Http\Controllers;
