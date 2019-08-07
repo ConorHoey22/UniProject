@@ -1,6 +1,6 @@
 # Music Social Media Website
 
-This is my final year project which is a Music social media website using HTML , CSS , PHP ,MySQL and Laravel PHP and Bootstrap. 
+This is my final year project which is a music social media website using HTML , CSS , PHP ,MySQL and Laravel PHP and Bootstrap. 
 The aim of this website is to allow users to discover new music artists and bands and also artists and bands can use this platform to promote themselves. This website also contains a function which allows the users to request data from the Spotify API which is then displayed using spotify widgets.(Custom Spotify Recommendation System).
 
 Functions of the website:
@@ -23,11 +23,22 @@ Note - There are some unused files but these ater for future developments
 
 - Separate Functions into different controllers
 - Possibly use Vue.js alongside Laravel
-- Improvements to to the frontend design as the current frontend contains basic 
+- Improvements to the frontend design as the current frontend contains a basic design and color scheme
 
-# Spotify API - Advanced Recommendation System  (SpotifyController.php)
+# Spotify API - Advanced Recommendation System  
 
-This project utilies Larafy ( https://github.com/rennokki/larafy ) which  is a PHP API Wrapper for Spotify API. This wrapper is more oriented over Spotifys Client Credentials authenticated endpoints. This was just an addition feature of my uni assignment.
+(SpotifyController.php)
+
+This project utilities Larafy ( https://github.com/rennokki/larafy ) which  is a PHP API Wrapper for Spotify API. This wrapper is more oriented over Spotifys Client Credentials authenticated endpoints. This was just an addition feature of my uni assignment.
+
+Basic Search
+- User can search by music genre
+
+Advanced Search
+
+- 5 values must be entered to complete this search. This includes the min and max value of instrumentalness and liveness between 1-10 and the music genre.
+-The function then sends the request to the Sporify API and sends a artist or band back to the website.
+- Once the system retrieves the data , It then is stored in specific variables which allow the website to use and display Spotify widgets.
 ```
 <?php
 namespace App\Http\Controllers;
